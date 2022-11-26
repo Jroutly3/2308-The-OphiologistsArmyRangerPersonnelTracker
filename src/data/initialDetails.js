@@ -1,0 +1,88 @@
+const initialDetails = [
+    {
+      id: 1,
+      unit: 1,
+      name: "Al Dente",
+      location: "Italy",
+      phoneNumber: "123-456-7890",
+    },
+    {
+      id: 2,
+      unit: 2,
+      name: "Brock Lee",
+      location: "Japan",
+      phoneNumber: "987-654-3210",
+    },
+    {
+      id: 3,
+      unit: 9,
+      name: "Chris Cross",
+      location: "United States",
+      phoneNumber: "420-024-4242",
+    },
+    {
+      id: 4,
+      unit: 3,
+      name: "Dan Druff",
+      location: "Canada",
+      phoneNumber: "999-919-9999",
+    },
+    {
+      id: 5,
+      unit: 5,
+      name: "Hingle McCringleberry",
+      location: "United States",
+      phoneNumber: "696-969-6969",
+    },
+    {
+      id: 6,
+      unit: 1,
+      name: "Hugh Moris",
+      location: "Djibouti",
+      phoneNumber: "333-333-3333",
+    },
+    {
+      id: 7,
+      unit: 3,
+      name: "Jed Dye",
+      location: "Australia",
+      phoneNumber: "124-816-3264",
+    },
+    {
+      id: 8,
+      unit: 9,
+      name: "Kerry Oki",
+      location: "Japan",
+      phoneNumber: "011-235-8132",
+    },
+    {
+      id: 9,
+      unit: 2,
+      name: "Marshall Law",
+      location: "Syria",
+      phoneNumber: "963-852-7410",
+    },
+    {
+      id: 10,
+      unit: 2,
+      name: "Neil McNeil",
+      location: "Ireland",
+      phoneNumber: "014-725-8369",
+    },
+    {
+      id: 11,
+      unit: 1,
+      name: "Oren Jellow",
+      location: "Mexico",
+      phoneNumber: "000-001-0001",
+    },
+    {
+      id: 12,
+      unit: 5,
+      name: "Tom A. Toe",
+      location: "India",
+      phoneNumber: "777-777-7777",
+    },
+  ];
+  
+  export default initialDetails;
