@@ -1,12 +1,28 @@
 import React from "react";
-import Search from './components/Search';
-import initialDetails from './data/initialDetails';
+import './App.css';
+import Search from './pages/Search';
+// import initialDetails from './data/initialDetails';
+import { BrowserRouter as Router, Routes, Route}
+    from 'react-router-dom';
+import Navbar from "./components/Navbar";
+import EnterNewPersonnel from './pages/EnterNewPersonnel';
+import LogOut from './pages/LogOut';
+import Sort from "./pages/Sort";
+import UpdateExistingPersonnel from "./pages/UpdateExistingPersonnel";
+// import Home from './pages';
 
 function App() {
   return (
-    <div className="tc bg-green ma0 pa4 min-vh-100">
-      <Search details={initialDetails}/>
-    </div>
+    <Router>
+    <Navbar />
+    <Routes>
+        <Route path='/EnterNewPersonnel' element={<EnterNewPersonnel/>} />
+        <Route path='/Search' element={<Search/>} />
+        <Route path='/Sort' element={<Sort/>} />
+        <Route path='/LogOut' element={<LogOut/>} />
+        <Route path='/UpdateExistingPersonnel' element={<UpdateExistingPersonnel/>} />
+    </Routes>
+    </Router>
   );
 }
 

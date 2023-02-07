@@ -1,8 +1,11 @@
 import React, {useState} from "react";
-import Scroll from "./Scroll";
-import SearchList from "./SearchList";
+import Scroll from "../components/SearchFunctions/Scroll";
+import SearchList from "../components/SearchFunctions/SearchList";
+import initialDetails from '../data/initialDetails'
 
-function Search({details}) {
+//details = initialDetails;
+
+function Search({details = initialDetails}) {
     const [searchField, setSearchField] = useState("");
     const [searchShow, setSearchShow] = useState(false); 
 
@@ -11,7 +14,7 @@ function Search({details}) {
             return (
                 person.name.toLowerCase().includes(searchField.toLowerCase()) ||
                 person.location.toLowerCase().includes(searchField.toLowerCase()) ||
-                person.phoneNumber.toLowerCase().includes(searchField.toLowerCase())
+                person.unit.toLowerCase().includes(searchField.toLowerCase())
             );
         }
     );
@@ -39,7 +42,7 @@ function Search({details}) {
     return (
         <section className="garamond">
           <div className="navy georgia ma0 grow">
-            <h2 className="f2">Personell Search</h2>
+            <h2 className="f2">Personnel Search</h2>
           </div>
           <div className="pa2">
             <input 
