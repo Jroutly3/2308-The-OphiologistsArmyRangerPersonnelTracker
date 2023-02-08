@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import Scroll from "../components/SearchFunctions/Scroll";
 import SearchList from "../components/SearchFunctions/SearchList";
-import initialDetails from '../data/initialDetails'
+import initialDetails from '../data/initialDetails';
+import Card from "../components/Card";
 
 
 
@@ -20,7 +21,6 @@ function Search({details = initialDetails.initialDetails}) {
             );
         }
     );
-    
     const handleChange = e => {
         setSearchField(e.target.value);
         if(e.target.value===""){
@@ -54,9 +54,20 @@ function Search({details = initialDetails.initialDetails}) {
               onChange = {handleChange}
             />
           </div>
+          
           {searchList()}
         </section>
       );
 }
 
 export default Search;
+
+/*
+const testperson = {
+      "id": 0,
+      "unit": "Company",
+      "name": "Name",
+      "location": "Location",
+      "DODID": "DODID"
+    }
+    <Card key={testperson.id} person = {testperson}/>*/
