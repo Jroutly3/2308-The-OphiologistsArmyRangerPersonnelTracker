@@ -131,20 +131,54 @@ sp_main: begin
 end //
 delimiter ;
 
+drop procedure if exists searchMultifield;
+delimiter //
+create procedure searchMultifield(in ip_dodID char(10), in ip_name varchar(62))
+sp_main: begin
+	select * from regiment.rangers where (dodID = ip_dodID) and (concat(fname, ' ', mname, ' ', lname) like concat('%', ip_name, '%')) or (concat(fname, ' ', lname) like concat('%', ip_name, '%'));
+end //
+delimiter ;
+
 -- If no input is used, such as with sorts, views should be used
 create or replace view sortName as
 select * from regiment.rangers order by lname;
 
+create or replace view sortNameandCompany as
+select * from regiment.rangers order by lname, company;
+
 create or replace view sortID as
 select * from regiment.rangers order by dodID;
 
+create or replace view sortIDandCompany as
+select * from regiment.rangers order by dodID, company;
+
+create or replace view sortNameandID as
+select * from regiment.rangers order by lname, dodID;
+
+create or replace view sortIDandRank as
+select * from regiment.rangers order by dodID, milrank;
+
+create or replace view sortNameandRank as
+select * from regiment.rangers order by lname, milrank;
+
+create or replace view sortCompanyandRank as
+select * from regiment.rangers order by company, milrank;
+
 create or replace view sortCompany as
 select * from regiment.rangers order by company;
+
+create or replace view sortRank as
+select * from regiment.rangers order by milrank;
 
 create or replace view rangersrps as
 select fname, mname, lname, dodID, filename, file_location, file_date from regiment.rangers
 join
 regiment.srp_files on srpID = dodID;
+
+create or replace view rangersrpsSortName as
+select fname, mname, lname, dodID, filename, file_location, file_date from regiment.rangers
+join
+regiment.srp_files on srpID = dodID order by lname;
 
 create or replace view rangerrelatives as
 select rangers.fname as rangerfname, rangers.mname as rangermname, rangers.lname as rangerlname, dodID, relatives.fname as relativefname,
@@ -152,3 +186,17 @@ relatives.mname as relativemname, relatives.lname as relativelname, relatives.bi
 relatives.address as relativeaddress, relationship from regiment.rangers
 join
 regiment.relatives on rangerID = dodID;
+
+create or replace view rangerrelativesSortRangerName as
+select rangers.fname as rangerfname, rangers.mname as rangermname, rangers.lname as rangerlname, dodID, relatives.fname as relativefname,
+relatives.mname as relativemname, relatives.lname as relativelname, relatives.birthdate as relativebirthdate, 
+relatives.address as relativeaddress, relationship from regiment.rangers
+join
+regiment.relatives on rangerID = dodID order by rangerlname;
+
+create or replace view rangerrelativesSortRelativeName as
+select rangers.fname as rangerfname, rangers.mname as rangermname, rangers.lname as rangerlname, dodID, relatives.fname as relativefname,
+relatives.mname as relativemname, relatives.lname as relativelname, relatives.birthdate as relativebirthdate, 
+relatives.address as relativeaddress, relationship from regiment.rangers
+join
+regiment.relatives on rangerID = dodID order by relativelname;
