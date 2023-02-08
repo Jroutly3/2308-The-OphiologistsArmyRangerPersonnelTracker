@@ -152,6 +152,18 @@ select * from regiment.rangers order by dodID;
 create or replace view sortIDandCompany as
 select * from regiment.rangers order by dodID, company;
 
+create or replace view sortNameandID as
+select * from regiment.rangers order by lname, dodID;
+
+create or replace view sortIDandRank as
+select * from regiment.rangers order by dodID, milrank;
+
+create or replace view sortNameandRank as
+select * from regiment.rangers order by lname, milrank;
+
+create or replace view sortCompanyandRank as
+select * from regiment.rangers order by company, milrank;
+
 create or replace view sortCompany as
 select * from regiment.rangers order by company;
 
