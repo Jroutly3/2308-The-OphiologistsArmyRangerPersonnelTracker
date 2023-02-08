@@ -6,7 +6,7 @@ import SearchList from "../components/SearchFunctions/SearchList";
 const Sort = () => {
   return (
     <Scroll>
-        <SearchList filteredPersons={initialDetails}/>
+        <SearchList filteredPersons={initialDetails.initialDetails}/>
     </Scroll>
   );
 };

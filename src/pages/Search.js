@@ -3,9 +3,11 @@ import Scroll from "../components/SearchFunctions/Scroll";
 import SearchList from "../components/SearchFunctions/SearchList";
 import initialDetails from '../data/initialDetails'
 
-//details = initialDetails;
 
-function Search({details = initialDetails}) {
+
+function Search({details = initialDetails.initialDetails}) {
+  //console.log(initialDetails);
+  //console.log(details)
     const [searchField, setSearchField] = useState("");
     const [searchShow, setSearchShow] = useState(false); 
 
