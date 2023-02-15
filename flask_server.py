@@ -12,11 +12,25 @@ import mysql.connector
 
 # mysql = MySQL(app)
 # cursor = mysql.connection.cursor()
-cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
-                              host='127.0.0.1',
-                              database='regiment', port=3306)
-cursor = cnx.cursor()
-cursor.execute("SELECT * FROM rangers;")
+def search_rangers_name(name):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc('')
+def search_rangers_id(id):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc('')
+def search_rangers_multifield():
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc('')
+
 row_headers = [x[0] for x in cursor.description]
 result = cursor.fetchall()
 jsondata = []
