@@ -142,6 +142,7 @@ delimiter ;
 
 -- If no input is used, such as with sorts, views should be used
 create or replace view sortName as
+
 select * from regiment.rangers order by lname;
 
 create or replace view sortNameandCompany as
