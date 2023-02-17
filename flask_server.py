@@ -13,6 +13,9 @@ import mysql.connector
 
 # mysql = MySQL(app)
 # cursor = mysql.connection.cursor()
+
+#When running database, remember to change database password to that of the current user's database
+#Make sure input is at most 62 characters including spaces
 def search_rangers_name(name):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -24,7 +27,7 @@ def search_rangers_name(name):
     cursor.close()
     return result
 
-
+#Make sure input is explicitly 10 digits
 def search_rangers_id(id):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -70,15 +73,15 @@ def show_ranger_relatives():
     cursor.close()
     return result
 
-
+##sortName, sortID, sortCompany are booleans
 def show_rangers(sortName, sortID, sortCompany):
     query = "SELECT * FROM regiment.rangers"
     if sortName | sortID | sortCompany:
-        query = query + " sort by"
+        query = query + " order by"
         if sortName:
-            query = query + " name,"
+            query = query + " lname,"
         if sortID:
-            query = query + " id,"
+            query = query + " DODid,"
         if sortCompany:
             query = query + " company,"
         query = query[:-1]
