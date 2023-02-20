@@ -16,14 +16,33 @@ import mysql.connector
 
 #When running database, remember to change database password to that of the current user's database
 #Make sure input is at most 62 characters including spaces
+
+def json_return_proc(cursor):
+    row_headers = [x[0] for x in cursor.description]
+    for data in cursor.stored_results():
+        result = data.fetchall()
+    jsondata = []
+    for rv in result:
+        jsondata.append(dict(zip(row_headers, rv)))
+    result = json.dumps(jsondata, default=str)
+    return result
+
+def json_return_select(cursor):
+    row_headers = [x[0] for x in cursor.description]
+    result = cursor.fetchall()
+    jsondata = []
+    for rv in result:
+        jsondata.append(dict(zip(row_headers, rv)))
+    result = json.dumps(jsondata, default=str)
+    return result
+
 def search_rangers_name(name):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.callproc('searchName', [name])
-    row_headers = [x[0] for x in cursor.description]
-    result = json_return(cursor)
+    result = json_return_proc(cursor)
     cursor.close()
     return result
 
@@ -33,12 +52,10 @@ def search_rangers_id(id):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc('searchID', id)
-    row_headers = [x[0] for x in cursor.description]
-    result = json_return(cursor)
+    cursor.callproc('searchID', [id])
+    result = json_return_proc(cursor)
     cursor.close()
     return result
-
 
 def search_rangers_multifield(name, id):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
@@ -46,8 +63,7 @@ def search_rangers_multifield(name, id):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.callproc('searchMultifield', [id, name])
-    row_headers = [x[0] for x in cursor.description]
-    result = json_return(cursor)
+    result = json_return_proc(cursor)
     cursor.close()
     return result
 
@@ -58,7 +74,7 @@ def show_ranger_srps():
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.execute("SELECT * FROM regiment.rangersrps;")
-    result = json_return(cursor)
+    result = json_return_select(cursor)
     cursor.close()
     return result
 
@@ -69,7 +85,7 @@ def show_ranger_relatives():
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.execute("SELECT * FROM regiment.rangerrelatives;")
-    result = json_return(cursor)
+    result = json_return_select(cursor)
     cursor.close()
     return result
 
@@ -91,16 +107,6 @@ def show_rangers(sortName, sortID, sortCompany):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.execute(query)
-    result = json_return(cursor)
+    result = json_return_select(cursor)
     cursor.close()
-    return result
-
-
-def json_return(cursor):
-    row_headers = [x[0] for x in cursor.description]
-    result = cursor.fetchall()
-    jsondata = []
-    for rv in result:
-        jsondata.append(dict(zip(row_headers, rv)))
-    result = json.dumps(jsondata, default=str)
     return result
