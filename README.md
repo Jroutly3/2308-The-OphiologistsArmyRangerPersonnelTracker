@@ -3,6 +3,25 @@ This project provides a database to hold the information and documents of soldie
 
 # Release Notes
 
+## Version 0.2.0
+### Features:
+
+ - Added multifield sorting and searching to database procedures
+ 
+ - Connected frontend to backend, database queries can be run from UI
+
+ - Created server intermediary between UI and database, restricts database access to provided procedures
+
+### Bug Fixes
+
+ - Search bar modified to no longer not show results if results are set to be permanently visible
+
+ - Table view modified such that data shown in table is no longer unaligned due to length differences of input strings
+
+ ### Known Issues
+ 
+ - Server intermediary currently does not allow connections outside of host
+
 ## Version 0.1.0
 
 ### Features:
@@ -16,5 +35,7 @@ This project provides a database to hold the information and documents of soldie
 ### Bug Fixes
 
 N/A
+
+
 
 
