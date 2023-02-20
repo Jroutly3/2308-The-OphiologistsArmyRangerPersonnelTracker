@@ -12,6 +12,14 @@ function Search({details = initialDetails.initialDetails}) {
     const [searchField, setSearchField] = useState("");
     const [searchShow, setSearchShow] = useState(false); 
 
+    const testperson = {
+      "id": 0,
+      "unit": "Company",
+      "name": "Name",
+      "location": "Location",
+      "DODID": "DODID"
+    };
+
     const filteredPersons = details.filter(
         person => {
             return (
@@ -35,6 +43,7 @@ function Search({details = initialDetails.initialDetails}) {
       if (searchShow) {
         return(
             <Scroll>
+                <Card key={testperson.id} person = {testperson}/>
                 <SearchList filteredPersons={filteredPersons}/>
             </Scroll>
         );
@@ -53,6 +62,7 @@ function Search({details = initialDetails.initialDetails}) {
               placeholder = "Search People" 
               onChange = {handleChange}
             />
+            
           </div>
           
           {searchList()}
