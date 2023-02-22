@@ -16,15 +16,18 @@ function Search({details = initialDetails.initialDetails}) {
       "id": 0,
       "unit": "Company",
       "name": "Name",
-      "location": "Location",
-      "DODID": "DODID"
+      "DODID": "DODID",
+      "Rank": "Rank",
+      "ssn": "ssn",
+      "Birthdate": "Birthdate",
+      "Address": "Address",
+      "Status": "Status"
     };
 
     const filteredPersons = details.filter(
         person => {
             return (
-                person.name.toLowerCase().includes(searchField.toLowerCase()) ||
-                person.location.toLowerCase().includes(searchField.toLowerCase()) ||
+                person.name.toLowerCase().includes(searchField.toLowerCase())  ||
                 person.unit.toLowerCase().includes(searchField.toLowerCase())
             );
         }
