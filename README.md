@@ -21,6 +21,7 @@ This project provides a database to hold the information and documents of soldie
  ### Known Issues
  
  - Server intermediary currently does not allow connections outside of host
+ - The front end does not properly align sorted data
 
 ## Version 0.1.0
 
