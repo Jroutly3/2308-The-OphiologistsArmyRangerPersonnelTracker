@@ -17,7 +17,7 @@ import mysql.connector
 #When running database, remember to change database password to that of the current user's database
 #Make sure input is at most 62 characters including spaces
 def search_rangers_name(name):
-    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+    cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
@@ -29,7 +29,7 @@ def search_rangers_name(name):
 
 #Make sure input is explicitly 10 digits
 def search_rangers_id(id):
-    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+    cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
@@ -41,7 +41,7 @@ def search_rangers_id(id):
 
 
 def search_rangers_multifield(name, id):
-    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+    cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
@@ -53,7 +53,7 @@ def search_rangers_multifield(name, id):
 
 
 def show_ranger_srps():
-    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+    cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
@@ -64,7 +64,7 @@ def show_ranger_srps():
 
 
 def show_ranger_relatives():
-    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+    cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
@@ -86,7 +86,7 @@ def show_rangers(sortName, sortID, sortCompany):
             query = query + " company,"
         query = query[:-1]
     query = query + ";"
-    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+    cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
