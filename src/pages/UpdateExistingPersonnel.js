@@ -1,6 +1,7 @@
 import React from "react";
 import { Dropdown, Option } from "../components/DropdownDOD";
 import initialDetails from '../data/initialDetails';
+import { DropdownSelect, OptionSelect } from '../components/DropdownSelector'
   
 const UpdateExistingPersonnel = () => {
   
@@ -10,7 +11,7 @@ const UpdateExistingPersonnel = () => {
         Update Existing Personnel
       </h1>
       <Dropdown
-        formLabel="Select the user's DODIDe"
+        formLabel="Select the user's DODID"
         buttonText="Submit"
         action= "/UpdatePersonnelConfirm" 
       >
@@ -28,6 +29,20 @@ const UpdateExistingPersonnel = () => {
         <Option value= {initialDetails.initialDetails[10].DODID} />
         <Option value= {initialDetails.initialDetails[11].DODID} />
       </Dropdown>
+      <DropdownSelect
+        formLabel="What do you want to change?"
+        buttonText="Submit"
+        action= "/UpdatePersonnelConfirm" 
+      >
+        <OptionSelect selected value="Click to see options" />
+        <OptionSelect value= "Rank" />
+        <OptionSelect value= "Unit" />
+        <OptionSelect value= "Name" />
+        <OptionSelect value= "Ssn" />
+        <OptionSelect value= "Birthdate" />
+        <OptionSelect value= "Address" />
+        <OptionSelect value= "Living" />
+      </DropdownSelect>
     </div>
   );
 };
