@@ -29,7 +29,7 @@ const Sort = () => {
   }
   function sortName() {
     sorted.sort((a,b) => a.DODID - b.DODID);
-    setsortField(false);
+    setsortShow(true);
     //console.log(sorted)
   }
   function totalSort() {
