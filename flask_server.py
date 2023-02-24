@@ -110,3 +110,12 @@ def show_rangers(sortName, sortID, sortCompany):
     result = json_return_select(cursor)
     cursor.close()
     return result
+
+def add_ranger(ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc ('add_ranger',[ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank])
+    cnx.commit()
+    cursor.close()
