@@ -142,7 +142,6 @@ delimiter ;
 
 -- If no input is used, such as with sorts, views should be used
 create or replace view sortName as
-
 select * from regiment.rangers order by lname;
 
 create or replace view sortNameandCompany as
@@ -171,6 +170,18 @@ select * from regiment.rangers order by company;
 
 create or replace view sortRank as
 select * from regiment.rangers order by milrank;
+
+create or replace view sortNameIDCompany as
+select * from regiment.rangers order by lname, dodID, company;
+
+create or replace view sortNameIDRank as
+select * from regiment.rangers order by lname, dodID, milrank;
+
+create or replace view sortNameCompanyRank as
+select * from regiment.rangers order by lname, company, milrank;
+
+create or replace view sortIDCompanyRank as
+select * from regiment.rangers order by dodID, company, milrank;
 
 create or replace view rangersrps as
 select fname, mname, lname, dodID, filename, file_location, file_date from regiment.rangers
