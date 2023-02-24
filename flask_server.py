@@ -119,3 +119,30 @@ def add_ranger(ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_
     cursor.callproc ('add_ranger',[ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank])
     cnx.commit()
     cursor.close()
+    
+    def add_relative(ip_fname, ip_mname, ip_lname, ip_ssn, ip_rangerID, ip_birthdate, ip_address, ip_relationship):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc ('add_relative',[ip_fname, ip_mname, ip_lname, ip_ssn, ip_rangerID, ip_birthdate, ip_address, ip_relationship])
+    cnx.commit()
+    cursor.close()
+
+def add_srp(ip_filename, ip_file_location, ip_srpID, ip_file_date):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc ('add_srp',[ip_filename, ip_file_location, ip_srpID, ip_file_date])
+    cnx.commit()
+    cursor.close()
+
+def add_account(ip_ID, ip_rangerpassword, ip_IsAdmin):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc ('add_account',[ip_ID, ip_rangerpassword, ip_IsAdmin])
+    cnx.commit()
+    cursor.close()
