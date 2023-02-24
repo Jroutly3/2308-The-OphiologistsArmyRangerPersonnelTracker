@@ -16,7 +16,7 @@ export function Dropdown(props) {
       <StyledSelect id="services" name="services">
         {props.children}
       </StyledSelect>
-      <StyledButton type="submit" value={props.buttonText} />
+      <StyledButton type="submit" value={props.buttonText}/>
     </DropdownWrapper>
   );
 }
