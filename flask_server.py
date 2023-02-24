@@ -146,3 +146,193 @@ def add_account(ip_ID, ip_rangerpassword, ip_IsAdmin):
     cursor.callproc ('add_account',[ip_ID, ip_rangerpassword, ip_IsAdmin])
     cnx.commit()
     cursor.close()
+    
+def show_ranger_sortname():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortName;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortNameandCompany():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortNameandCompany;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortID():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortID;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortIDandCompany():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortIDandCompany;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortNameandID():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortNameandID;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortIDandRank():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortIDandRank;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortNameandRank():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortNameandRank;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortCompanyandRank():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortCompanyandRank;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortCompany():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortCompany;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortRank():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortRank;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortNameIDCompany():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortNameIDCompany;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortNameIDRank():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortNameIDRank;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortNameCompanyRank():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortNameCompanyRank;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_sortIDCompanyRank():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.sortIDCompanyRank;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_srps():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.rangersrps;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_srpsSortName():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.rangersrpsSortName;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_relatives():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.rangerrelatives;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_relativesSortRangerName():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.rangerrelativesSortRangerName;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
+
+def show_ranger_relativesSortRelativeName():
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM regiment.rangerrelativesSortRelativeName;")
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
