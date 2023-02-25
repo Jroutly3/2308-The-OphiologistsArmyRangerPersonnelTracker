@@ -9,8 +9,9 @@ import {
 import initialDetails from '../data/initialDetails';
 
 export function Dropdown(props) {
+  
   return (
-    <DropdownWrapper action={props.action}>
+    <DropdownWrapper action={props.action} style>
       <StyledLabel htmlFor="services">
         {props.formLabel}
       </StyledLabel>

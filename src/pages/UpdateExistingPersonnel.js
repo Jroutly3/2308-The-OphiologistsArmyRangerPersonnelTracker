@@ -4,9 +4,16 @@ import initialDetails from '../data/initialDetails';
 import { DropdownSelect, OptionSelect } from '../components/DropdownSelector'
   
 const UpdateExistingPersonnel = () => {
-  
+  var letterStyle = {
+    padding: 10,
+    margin: 10,
+    display: "inline-block",
+    fontFamily: "monospace",
+    fontSize: 24,
+    textAlign: "center"
+};
   return (
-    <div>
+    <div style={letterStyle}>
       <h1>
         Update Existing Personnel
       </h1>

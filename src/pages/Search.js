@@ -24,6 +24,15 @@ function Search({details = initialDetails.initialDetails}) {
       "Status": "Status"
     };
 
+    var letterStyle = {
+      padding: 10,
+      margin: 10,
+      display: "inline-block",
+      fontFamily: "monospace",
+      fontSize: 24,
+      textAlign: "center"
+  };
+
     const filteredPersons = details.filter(
         person => {
             return (
@@ -54,7 +63,7 @@ function Search({details = initialDetails.initialDetails}) {
     }
 
     return (
-        <section className="garamond">
+        <section className="garamond" style={letterStyle}>
           <div className="navy georgia ma0 grow">
             <h2 className="f2">Personnel Search</h2>
           </div>

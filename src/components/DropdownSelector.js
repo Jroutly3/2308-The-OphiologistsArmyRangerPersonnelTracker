@@ -6,7 +6,7 @@ import {
   StyledLabel,
   StyledButton,
 } from "./dropDownDODstyle";
-import initialDetails from '../data/initialDetails';
+//import initialDetails from '../data/initialDetails';
 
 export function DropdownSelect(props) {
   return (
@@ -17,6 +17,11 @@ export function DropdownSelect(props) {
       <StyledSelect id="services" name="services">
         {props.children}
       </StyledSelect>
+      <input 
+              className="pa3 bb br3 ma3"
+              type = "search" 
+              placeholder = "New value" 
+            />
       <StyledButton type="submit" value={props.buttonText}/>
     </DropdownWrapper>
   );
