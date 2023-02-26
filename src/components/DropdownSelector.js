@@ -8,7 +8,7 @@ import {
 } from "./dropDownDODstyle";
 import initialDetails from '../data/initialDetails';
 
-export function Dropdown(props) {
+export function DropdownSelect(props) {
   return (
     <DropdownWrapper action={props.action}>
       <StyledLabel htmlFor="services">
@@ -17,11 +17,12 @@ export function Dropdown(props) {
       <StyledSelect id="services" name="services">
         {props.children}
       </StyledSelect>
+      <StyledButton type="submit" value={props.buttonText}/>
     </DropdownWrapper>
   );
 }
 // [Name, Rank, Unit, Ssn, Birthdate, Address, Status]
-export function Option(props) {
+export function OptionSelect(props) {
   return (
     <StyledOption selected={props.selected}>
       {props.value}
