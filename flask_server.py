@@ -146,3 +146,11 @@ def add_account(ip_ID, ip_rangerpassword, ip_IsAdmin):
     cursor.callproc ('add_account',[ip_ID, ip_rangerpassword, ip_IsAdmin])
     cnx.commit()
     cursor.close()
+
+#Method for pulling unique key for soldiers for dropdowns
+def pull_DODIDs():
+    cursor.execute("Select dodID from regiment.rangers")
+    result = cursor.fetchall()
+    result = json.dumps(result, default=str)
+    cursor.close()
+    return result
