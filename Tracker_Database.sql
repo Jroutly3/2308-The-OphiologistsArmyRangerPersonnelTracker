@@ -20,9 +20,9 @@ CREATE TABLE rangers (
     'Master Sergeant', 'First Sergeant', 'Sergeant Major', 'Command Sergeant Major', 'Sergeant Major of the Army', 
     'Second Lieutenant', 'First Lieutenant', 'Captain', 'Major', 'Lieutenant Colonel', 'Colonel', 'Brigadier General', 'Major General',
     'Lieutenant General', 'General', 'General of the Army') not null,
-    primary key (dodID),
+    primary key (dodID), 
     unique key (ssn)
-    );
+    ); 
     
     insert into rangers values ('John', 'Placeholder', 'Smith', '111-11-1111', '1234567890', '1997-04-09', '7372 Milquetoast Rd','07', True, 'First Lieutenant')
     , ('Smith', 'Angle', 'John', '222-22-2222', '1231231231', '1990-08-07', '4273 Boring Dr', '07', True, 'Master Sergeant'); 
@@ -33,7 +33,7 @@ CREATE TABLE accounts (
     rangerpassword varchar(30) not null,
     IsAdmin boolean not null,
     primary key (ID),
-	CONSTRAINT login_fk1 foreign key (ID) references rangers (dodID)
+	CONSTRAINT login_fk1 foreign key (ID) references rangers (dodID) on delete cascade on update cascade
     );
     
     insert into accounts values ('1234567890', 'password', false);
@@ -45,7 +45,7 @@ CREATE TABLE srp_files (
     srpID char(10) not null,
     file_date date not null,
     primary key (srpID, filename),
-    CONSTRAINT srp_fk1 foreign key (srpID) references rangers (dodID)
+    CONSTRAINT srp_fk1 foreign key (srpID) references rangers (dodID) on delete cascade on update cascade
     );
     
     insert into srp_files values ('srp112024', 'C:/Dummy/DummyFolder/Srp_Files/srp112024.pdf', '1234567890', '2022-11-22'), 
@@ -62,7 +62,7 @@ CREATE TABLE relatives (
     address varchar(40) not null,
     relationship varchar(20) not null,
     primary key (rangerID, ssn),
-    CONSTRAINT relatives_fk2 foreign key (rangerID) references rangers (dodID)
+    CONSTRAINT relatives_fk2 foreign key (rangerID) references rangers (dodID) on delete cascade on update cascade
     );
     
     insert into relatives values ('Mary', 'Redlohecalp', 'Smith', '987-65-4321', '1234567890', '1998-02-02', '7372 Milquetoast Rd', 'Spouse');
