@@ -6,7 +6,7 @@ import Card from "../components/Card";
 //import flask_server from "../../flask_server.py"
   
 const Sort = () => {
-  const [sortField, setsortField] = useState("");
+  const [sortField, setsortField] = useState(false);
    const [sortShow, setsortShow] = useState(false); 
 
    const testperson = {
@@ -20,16 +20,26 @@ const Sort = () => {
     "Address": "Address",
     "Status": "Status"
   };
+
   var sorted = initialDetails.initialDetails;
   //console.log(sorted)
   function sayHello() {
     sorted.sort((a,b) => a.unit - b.unit);
-    setsortField(true);
+    if (sortField == false) {
+      setsortField(true);
+    } else {
+      setsortField(false);
+    }
+    
     //console.log(sorted)
   }
   function sortName() {
     sorted.sort((a,b) => a.DODID - b.DODID);
-    setsortField(false);
+    if (sortShow == false) {
+      setsortShow(true);
+    } else {
+      setsortShow(false);
+    }
     //console.log(sorted)
   }
   function totalSort() {
