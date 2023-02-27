@@ -4,6 +4,7 @@ import json
 import mysql.connector
 
 
+
 # app = Flask(__name__)
 
 # app.config['MYSQL_HOST'] = 'localhost'
@@ -14,8 +15,8 @@ import mysql.connector
 # mysql = MySQL(app)
 # cursor = mysql.connection.cursor()
 
-#When running database, remember to change database password to that of the current user's database
-#Make sure input is at most 62 characters including spaces
+# When running database, remember to change database password to that of the current user's database
+# Make sure input is at most 62 characters including spaces
 
 def json_return_proc(cursor):
     row_headers = [x[0] for x in cursor.description]
@@ -27,6 +28,7 @@ def json_return_proc(cursor):
     result = json.dumps(jsondata, default=str)
     return result
 
+
 def json_return_select(cursor):
     row_headers = [x[0] for x in cursor.description]
     result = cursor.fetchall()
@@ -35,6 +37,7 @@ def json_return_select(cursor):
         jsondata.append(dict(zip(row_headers, rv)))
     result = json.dumps(jsondata, default=str)
     return result
+
 
 def search_rangers_name(name):
     cnx = mysql.connector.connect(user='root', password='password',
@@ -46,7 +49,8 @@ def search_rangers_name(name):
     cursor.close()
     return result
 
-#Make sure input is explicitly 10 digits
+
+# Make sure input is explicitly 10 digits
 def search_rangers_id(id):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
@@ -56,6 +60,7 @@ def search_rangers_id(id):
     result = json_return_proc(cursor)
     cursor.close()
     return result
+
 
 def search_rangers_multifield(name, id):
     cnx = mysql.connector.connect(user='root', password='password',
@@ -89,6 +94,7 @@ def show_ranger_relatives():
     cursor.close()
     return result
 
+
 ##sortName, sortID, sortCompany are booleans
 def show_rangers(sortName, sortID, sortCompany):
     query = "SELECT * FROM regiment.rangers"
@@ -111,46 +117,105 @@ def show_rangers(sortName, sortID, sortCompany):
     cursor.close()
     return result
 
+
 def add_ranger(ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc ('add_ranger',[ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank])
+    cursor.callproc('add_ranger',
+                    [ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank])
     cnx.commit()
     cursor.close()
-    
+
+
 def add_relative(ip_fname, ip_mname, ip_lname, ip_ssn, ip_rangerID, ip_birthdate, ip_address, ip_relationship):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc ('add_relative',[ip_fname, ip_mname, ip_lname, ip_ssn, ip_rangerID, ip_birthdate, ip_address, ip_relationship])
+    cursor.callproc('add_relative',
+                    [ip_fname, ip_mname, ip_lname, ip_ssn, ip_rangerID, ip_birthdate, ip_address, ip_relationship])
     cnx.commit()
     cursor.close()
+
 
 def add_srp(ip_filename, ip_file_location, ip_srpID, ip_file_date):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc ('add_srp',[ip_filename, ip_file_location, ip_srpID, ip_file_date])
+    cursor.callproc('add_srp', [ip_filename, ip_file_location, ip_srpID, ip_file_date])
     cnx.commit()
     cursor.close()
+
 
 def add_account(ip_ID, ip_rangerpassword, ip_IsAdmin):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc ('add_account',[ip_ID, ip_rangerpassword, ip_IsAdmin])
+    cursor.callproc('add_account', [ip_ID, ip_rangerpassword, ip_IsAdmin])
     cnx.commit()
     cursor.close()
 
-#Method for pulling unique key for soldiers for dropdowns
+
+##Method for pulling unique key for soldiers for dropdowns
 def pull_DODIDs():
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
     cursor.execute("Select dodID from regiment.rangers")
     result = cursor.fetchall()
     result = json.dumps(result, default=str)
     cursor.close()
     return result
+
+def modify_ranger(dodID, field, data):
+    match field:
+        case "fname":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 20):
+                return "Name entered is too long"
+        case "mname":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 20):
+                return "Name entered is too long"
+        case "lname":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 20):
+                return "Name entered is too long"
+        case "ssn":
+            if (data.isnumeric() == False):
+                return "Data enter should be only numbers"
+            elif (len(data) != 10):
+                return  "SSN entered is not correct length"
+        case "dodID":
+            if (data.isnumeric() == False):
+                return "Data enter should be only numbers"
+            elif (len(data) != 11):
+                return "ID entered is not correct length"
+        case "address":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 40):
+                return "Address entered is too long"
+        case "company":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 40):
+                return "Company entered is too long"
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    if field == "dodID" | field == "ssn" | field == "livingstatus":
+        cursor.execute("Update regiment.rangers set " + field + " = " + data + " where dodID = " + dodID)
+    else:
+        cursor.execute("Update regiment.rangers set " + field + " = \"" + data + "\" where dodID = " + dodID)
+    cursor.commit()
+    cursor.close()
