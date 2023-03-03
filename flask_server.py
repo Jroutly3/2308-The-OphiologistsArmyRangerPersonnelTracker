@@ -2,7 +2,8 @@ from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 import json
 import mysql.connector
-
+import os
+import shutil
 
 
 # app = Flask(__name__)
@@ -219,3 +220,11 @@ def modify_ranger(dodID, field, data):
         cursor.execute("Update regiment.rangers set " + field + " = \"" + data + "\" where dodID = " + dodID)
     cursor.commit()
     cursor.close()
+
+    # method to move file, given original filepath
+    # using placeholder filepaths for now
+    def move_file(filepath):
+        ## might need to check if filepath is valid
+        # used: '/Users/ericsong/Documents/test2/test.txt
+        destination = '/Users/ericsong/Documents/test1/test.txt'
+        shutil.move(filepath, destination)
