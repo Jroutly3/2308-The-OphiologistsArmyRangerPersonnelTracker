@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c1d935fb-2269-433d-90ee-1fa40ea42c81" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tracker_Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Tracker_Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -190,7 +189,10 @@
       <workItem from="1676646022797" duration="1493000" />
       <workItem from="1676935305538" duration="1454000" />
       <workItem from="1677249717054" duration="314000" />
-      <workItem from="1677465065667" duration="1598000" />
+      <workItem from="1677465065667" duration="1766000" />
+      <workItem from="1677681208153" duration="2927000" />
+      <workItem from="1677854699608" duration="287000" />
+      <workItem from="1677855899203" duration="527000" />
     </task>
     <servers />
   </component>
@@ -198,6 +200,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/flask_server_py$flask_server.coverage" NAME="flask_server Coverage Results" MODIFIED="1677249984288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flask_server_py$flask_server.coverage" NAME="flask_server Coverage Results" MODIFIED="1677856420644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
