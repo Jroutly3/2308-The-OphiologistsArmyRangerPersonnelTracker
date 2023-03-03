@@ -134,6 +134,7 @@ def add_ranger(ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_
     cursor.callproc('add_ranger',
                     [ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank])
     cnx.commit()
+    cnx.close()
     cursor.close()
 
 
@@ -222,11 +223,12 @@ def modify_ranger(dodID, field, data):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    if field == "dodID" | field == "ssn" | field == "livingstatus":
+    if ((field == "dodID") | (field == "ssn") | (field == "livingstatus")):
         cursor.execute("Update regiment.rangers set " + field + " = " + data + " where dodID = " + dodID)
     else:
         cursor.execute("Update regiment.rangers set " + field + " = \"" + data + "\" where dodID = " + dodID)
-    cursor.commit()
+    cnx.commit()
+    cnx.close()
     cursor.close()
 
 
@@ -236,5 +238,6 @@ def delete_ranger(ssn):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.execute("Delete from regiment.rangers where ssn = " + ssn + ";")
-    cursor.commit()
+    cnx.commit()
+    cnx.close()
     cursor.close()
