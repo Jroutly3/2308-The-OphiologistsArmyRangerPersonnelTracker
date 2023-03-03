@@ -4,7 +4,6 @@ import json
 import mysql.connector
 
 
-
 # app = Flask(__name__)
 
 # app.config['MYSQL_HOST'] = 'localhost'
@@ -13,7 +12,11 @@ import mysql.connector
 # app.config['MYSQL_DB'] = 'regiment'
 
 # mysql = MySQL(app)
-# cursor = mysql.connection.cursor()
+# @app.route('/')
+# def get_cursor():
+#    with app.app_context():
+#        return mysql.connection.cursor()
+
 
 # When running database, remember to change database password to that of the current user's database
 # Make sure input is at most 62 characters including spaces
@@ -74,14 +77,19 @@ def search_rangers_multifield(name, id):
 
 
 def show_ranger_srps():
-    cnx = mysql.connector.connect(user='root', password='password',
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
+    #cursor = get_cursor()
     cursor.execute("SELECT * FROM regiment.rangersrps;")
     result = json_return_select(cursor)
     cursor.close()
     return result
+
+
+# Testing method
+# print(show_ranger_srps())
 
 
 def show_ranger_relatives():
@@ -172,6 +180,7 @@ def pull_DODIDs():
     cursor.close()
     return result
 
+
 def modify_ranger(dodID, field, data):
     match field:
         case "fname":
@@ -193,7 +202,7 @@ def modify_ranger(dodID, field, data):
             if (data.isnumeric() == False):
                 return "Data enter should be only numbers"
             elif (len(data) != 10):
-                return  "SSN entered is not correct length"
+                return "SSN entered is not correct length"
         case "dodID":
             if (data.isnumeric() == False):
                 return "Data enter should be only numbers"
@@ -217,5 +226,15 @@ def modify_ranger(dodID, field, data):
         cursor.execute("Update regiment.rangers set " + field + " = " + data + " where dodID = " + dodID)
     else:
         cursor.execute("Update regiment.rangers set " + field + " = \"" + data + "\" where dodID = " + dodID)
+    cursor.commit()
+    cursor.close()
+
+
+def delete_ranger(ssn):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("Delete from regiment.rangers where ssn = " + ssn + ";")
     cursor.commit()
     cursor.close()
