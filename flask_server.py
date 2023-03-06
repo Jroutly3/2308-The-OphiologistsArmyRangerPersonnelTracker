@@ -201,14 +201,13 @@ def modify_ranger(dodID, field, data):
             elif (len(data) > 20):
                 return "Name entered is too long"
         case "ssn":
-            if (data.isnumeric() == False):
-                return "Data enter should be only numbers"
-            elif (len(data) != 10):
-                return "SSN entered is not correct length"
+            ssnregex = r'^\d{3}-\d{2}-\d{4}$'
+            if not re.match(ssnregex, data):
+                return "Data not in XXX-XX-XXXX format"
         case "dodID":
             if (data.isnumeric() == False):
                 return "Data enter should be only numbers"
-            elif (len(data) != 11):
+            elif (len(data) != 10):
                 return "ID entered is not correct length"
         case "address":
             if (data.isalpha() == False):
@@ -220,6 +219,13 @@ def modify_ranger(dodID, field, data):
                 return "Data entered should be only letters"
             elif (len(data) > 40):
                 return "Company entered is too long"
+        case "livingstatus":
+            if not isinstance(data, bool):
+                return "Data not a True/False value"
+        case "birthdate:
+            dateregex = r'^\d{4}-\d{2}-\d{2}$'
+            if not re.match(dateregex, data):
+                return "Data is not in XXXX-XX-XX format"
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
@@ -280,6 +286,10 @@ def modify_relatives(rangerID, ssn, field, data):
                 return "Data entered should be only letters"
             elif (len(data) > 20):
                 return "Relationship entered is too long"
+        case "birthdate:
+            dateregex = r'^\d{4}-\d{2}-\d{2}$'
+            if not re.match(dateregex, data):
+                return "Data is not in XXXX-XX-XX format"
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
@@ -318,6 +328,10 @@ def modify_srp_files(srpID, filename, field, data):
                 return "Data entered should be only numbers"
             elif (len(data) != 10):
                 return "ID entered is too long"
+        case "file_date":
+            dateregex = r'^\d{4}-\d{2}-\d{2}$'
+            if not re.match(dateregex, data):
+                return "Data is not in XXXX-XX-XX format"
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
