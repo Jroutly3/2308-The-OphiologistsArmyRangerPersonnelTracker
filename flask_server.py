@@ -202,14 +202,13 @@ def modify_ranger(dodID, field, data):
             elif (len(data) > 20):
                 return "Name entered is too long"
         case "ssn":
-            if (data.isnumeric() == False):
-                return "Data enter should be only numbers"
-            elif (len(data) != 10):
-                return "SSN entered is not correct length"
+            ssnregex = r'^\d{3}-\d{2}-\d{4}$'
+            if not re.match(ssnregex, data):
+                return "Data not in XXX-XX-XXXX format"
         case "dodID":
             if (data.isnumeric() == False):
                 return "Data enter should be only numbers"
-            elif (len(data) != 11):
+            elif (len(data) != 10):
                 return "ID entered is not correct length"
         case "address":
             if (data.isalpha() == False):
@@ -221,6 +220,13 @@ def modify_ranger(dodID, field, data):
                 return "Data entered should be only letters"
             elif (len(data) > 40):
                 return "Company entered is too long"
+        case "livingstatus":
+            if not isinstance(data, bool):
+                return "Data not a True/False value"
+        case "birthdate:
+            dateregex = r'^\d{4}-\d{2}-\d{2}$'
+            if not re.match(dateregex, data):
+                return "Data is not in XXXX-XX-XX format"
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
@@ -280,6 +286,10 @@ def modify_relatives(rangerID, ssn, field, data):
                 return "Data entered should be only letters"
             elif (len(data) > 20):
                 return "Relationship entered is too long"
+        case "birthdate:
+            dateregex = r'^\d{4}-\d{2}-\d{2}$'
+            if not re.match(dateregex, data):
+                return "Data is not in XXXX-XX-XX format"
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
@@ -299,6 +309,87 @@ def delete_relatives(rangerID, ssn):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.execute("Delete from regiment.relatives rangerID = " + rangerID + "and ssn = " + ssn + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
+
+#This currently modifies entries in the srp_file table, not that actual srp pdf
+def modify_srp_files(srpID, filename, field, data):
+    match field:
+        case "filename":
+            if (len(data) > 30):
+                return "Name entered is too long"
+        case "file_location":
+            if (len(data) > 100):
+                return "File path entered is too long"
+        case "srpID":
+            if (data.isnumeric() == False):
+                return "Data entered should be only numbers"
+            elif (len(data) != 10):
+                return "ID entered is too long"
+        case "file_date":
+            dateregex = r'^\d{4}-\d{2}-\d{2}$'
+            if not re.match(dateregex, data):
+                return "Data is not in XXXX-XX-XX format"
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    if (field == "srpID"):
+        cursor.execute("Update regiment.srp_files set " + field + " = " + data + " where srpId = " + srpID + "and filename = " + filename + ";")
+    else:
+        cursor.execute("Update regiment.srp_files set " + field + " = \"" + data + "\" where srpID = " + srpID + "and filename = " + filename + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
+
+
+#This currently deletes entries in the srp_file table, not that actual srp pdf
+def delete_srp_files(srpID, filename):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("Delete from regiment.srp_files srpID = " + srpID + "and filename = " + filename + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
+
+    
+#This will need to be modified when security features are implented
+def modify_accounts(ID, field, data):
+    match field:
+        case "rangerpassword":
+            if (len(data) > 30):
+                return "Password entered is too long"
+        case "isAdmin":
+            if not isinstance(data, bool):
+                return "Data not a True/False value"
+        case "ID":
+            if (data.isnumeric() == False):
+                return "ID entered should be only numbers"
+            elif (len(data) != 10):
+                return "ID entered is too long"
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    if ((field == "ID") | (field == "isAdmin")):
+        cursor.execute("Update regiment.accounts set " + field + " = " + data + " where ID = " + ID + ";")
+    else:
+        cursor.execute("Update regiment.accounts set " + field + " = \"" + data + "\" where ID = " + ID + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
+
+
+#This will need to be modified when security features are implented
+def delete_accounts(ID):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("Delete from regiment.accounts ID = " + ID + ";")
     cnx.commit()
     cnx.close()
     cursor.close()
