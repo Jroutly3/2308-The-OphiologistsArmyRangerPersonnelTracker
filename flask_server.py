@@ -223,7 +223,7 @@ def modify_ranger(dodID, field, data):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    if ((field == "dodID") | (field == "ssn") | (field == "livingstatus")):
+    if ((field == "dodID") | (field == "livingstatus")):
         cursor.execute("Update regiment.rangers set " + field + " = " + data + " where dodID = " + dodID)
     else:
         cursor.execute("Update regiment.rangers set " + field + " = \"" + data + "\" where dodID = " + dodID)
@@ -232,12 +232,13 @@ def modify_ranger(dodID, field, data):
     cursor.close()
 
 
-def delete_ranger(ssn):
+def delete_ranger(dodID):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.execute("Delete from regiment.rangers where ssn = " + ssn + ";")
+    cursor.execute("Delete from regiment.rangers where dodID = " + dodID + ";")
     cnx.commit()
     cnx.close()
     cursor.close()
+
