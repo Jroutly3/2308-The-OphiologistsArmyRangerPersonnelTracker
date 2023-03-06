@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 import json
 import mysql.connector
+import re
 
 
 # app = Flask(__name__)
@@ -238,6 +239,66 @@ def delete_ranger(ssn):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.execute("Delete from regiment.rangers where ssn = " + ssn + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
+   
+
+def modify_relatives(rangerID, ssn, field, data):
+    match field:
+        case "fname":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 20):
+                return "Name entered is too long"
+        case "mname":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 20):
+                return "Name entered is too long"
+        case "lname":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 20):
+                return "Name entered is too long"
+        case "ssn":
+            ssnregex = r'^\d{3}-\d{2}-\d{4}$'
+            if not re.match(ssnregex, data):
+                return "Data not in XXX-XX-XXXX format"
+        case "rangerID":
+            if (data.isnumeric() == False):
+                return "Data entered should be only numbers"
+            elif (len(data) != 10):
+                return "ID entered is not correct length"
+        case "address":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 40):
+                return "Address entered is too long"
+        case "relationship":
+            if (data.isalpha() == False):
+                return "Data entered should be only letters"
+            elif (len(data) > 20):
+                return "Relationship entered is too long"
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    if (field == "rangerID"):
+        cursor.execute("Update regiment.relatives set " + field + " = " + data + " where rangerID = " + rangerID + "and ssn = " + ssn + ";")
+    else:
+        cursor.execute("Update regiment.relatives set " + field + " = \"" + data + "\" where rangerID = " + rangerID + "and ssn = " + ssn + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
+
+
+def delete_relatives(rangerID, ssn):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("Delete from regiment.relatives rangerID = " + rangerID + "and ssn = " + ssn + ";")
     cnx.commit()
     cnx.close()
     cursor.close()
