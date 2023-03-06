@@ -341,3 +341,42 @@ def delete_srp_files(srpID, filename):
     cnx.commit()
     cnx.close()
     cursor.close()
+
+    
+#This will need to be modified when security features are implented
+def modify_accounts(ID, field, data):
+    match field:
+        case "rangerpassword":
+            if (len(data) > 30):
+                return "Password entered is too long"
+        case "isAdmin":
+            if not isinstance(data, bool):
+                return "Data not a True/False value"
+        case "ID":
+            if (data.isnumeric() == False):
+                return "ID entered should be only numbers"
+            elif (len(data) != 10):
+                return "ID entered is too long"
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    if ((field == "ID") | (field == "isAdmin")):
+        cursor.execute("Update regiment.accounts set " + field + " = " + data + " where ID = " + ID + ";")
+    else:
+        cursor.execute("Update regiment.accounts set " + field + " = \"" + data + "\" where ID = " + ID + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
+
+
+#This will need to be modified when security features are implented
+def delete_accounts(ID):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("Delete from regiment.accounts ID = " + ID + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
