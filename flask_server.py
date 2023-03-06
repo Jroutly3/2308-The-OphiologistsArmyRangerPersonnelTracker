@@ -302,3 +302,42 @@ def delete_relatives(rangerID, ssn):
     cnx.commit()
     cnx.close()
     cursor.close()
+    
+
+#This currently modifies entries in the srp_file table, not that actual srp pdf
+def modify_srp_files(srpID, filename, field, data):
+    match field:
+        case "filename":
+            if (len(data) > 30):
+                return "Name entered is too long"
+        case "file_location":
+            if (len(data) > 100):
+                return "File path entered is too long"
+        case "srpID":
+            if (data.isnumeric() == False):
+                return "Data entered should be only numbers"
+            elif (len(data) != 10):
+                return "ID entered is too long"
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    if (field == "srpID"):
+        cursor.execute("Update regiment.srp_files set " + field + " = " + data + " where srpId = " + srpID + "and filename = " + filename + ";")
+    else:
+        cursor.execute("Update regiment.srp_files set " + field + " = \"" + data + "\" where srpID = " + srpID + "and filename = " + filename + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
+
+
+#This currently deletes entries in the srp_file table, not that actual srp pdf
+def delete_srp_files(srpID, filename):
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("Delete from regiment.srp_files srpID = " + srpID + "and filename = " + filename + ";")
+    cnx.commit()
+    cnx.close()
+    cursor.close()
