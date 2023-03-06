@@ -3,7 +3,8 @@ from flask_mysqldb import MySQL
 import json
 import mysql.connector
 import re
-
+import os
+import shutil
 
 # app = Flask(__name__)
 
@@ -242,7 +243,6 @@ def delete_ranger(ssn):
     cnx.commit()
     cnx.close()
     cursor.close()
-   
 
 def modify_relatives(rangerID, ssn, field, data):
     match field:
@@ -302,3 +302,11 @@ def delete_relatives(rangerID, ssn):
     cnx.commit()
     cnx.close()
     cursor.close()
+
+    # method to move file, given original filepath
+    # using placeholder filepaths for now
+    def move_file(filepath):
+        ## might need to check if filepath is valid
+        # used: '/Users/ericsong/Documents/test2/test.txt
+        destination = '/Users/ericsong/Documents/test1/test.txt'
+        shutil.move(filepath, destination)
