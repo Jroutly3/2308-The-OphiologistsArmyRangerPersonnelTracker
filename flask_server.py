@@ -223,7 +223,7 @@ def modify_ranger(dodID, field, data):
         case "livingstatus":
             if not isinstance(data, bool):
                 return "Data not a True/False value"
-        case "birthdate:
+        case "birthdate":
             dateregex = r'^\d{4}-\d{2}-\d{2}$'
             if not re.match(dateregex, data):
                 return "Data is not in XXXX-XX-XX format"
@@ -286,7 +286,7 @@ def modify_relatives(rangerID, ssn, field, data):
                 return "Data entered should be only letters"
             elif (len(data) > 20):
                 return "Relationship entered is too long"
-        case "birthdate:
+        case "birthdate":
             dateregex = r'^\d{4}-\d{2}-\d{2}$'
             if not re.match(dateregex, data):
                 return "Data is not in XXXX-XX-XX format"
@@ -336,9 +336,9 @@ def modify_srp_files(srpID, filename, field, data):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     if (field == "srpID"):
-        cursor.execute("Update regiment.srp_files set " + field + " = " + data + " where srpId = " + srpID + " and filename = " + filename + ";")
+        cursor.execute("Update regiment.srp_files set " + field + " = " + data + " where srpId = " + srpID + " and filename = \"" + filename + "\";")
     else:
-        cursor.execute("Update regiment.srp_files set " + field + " = \"" + data + "\" where srpID = " + srpID + " and filename = " + filename + ";")
+        cursor.execute("Update regiment.srp_files set " + field + " = \"" + data + "\" where srpID = " + srpID + " and filename = \"" + filename + "\";")
     cnx.commit()
     cnx.close()
     cursor.close()
@@ -350,7 +350,7 @@ def delete_srp_files(srpID, filename):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.execute("Delete from regiment.srp_files srpID = " + srpID + " and filename = " + filename + ";")
+    cursor.execute("Delete from regiment.srp_files srpID = " + srpID + " and filename = \"" + filename + "\";")
     cnx.commit()
     cnx.close()
     cursor.close()
