@@ -245,7 +245,7 @@ def delete_ranger(ssn):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.execute("Delete from regiment.rangers where ssn = " + ssn + ";")
+    cursor.execute("Delete from regiment.rangers where ssn = \"" + ssn + "\";")
     cnx.commit()
     cnx.close()
     cursor.close()
@@ -295,9 +295,9 @@ def modify_relatives(rangerID, ssn, field, data):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     if (field == "rangerID"):
-        cursor.execute("Update regiment.relatives set " + field + " = " + data + " where rangerID = " + rangerID + " and ssn = " + ssn + ";")
+        cursor.execute("Update regiment.relatives set " + field + " = " + data + " where rangerID = " + rangerID + " and ssn = \"" + ssn + "\";")
     else:
-        cursor.execute("Update regiment.relatives set " + field + " = \"" + data + "\" where rangerID = " + rangerID + " and ssn = " + ssn + ";")
+        cursor.execute("Update regiment.relatives set " + field + " = \"" + data + "\" where rangerID = " + rangerID + " and ssn = \"" + ssn + "\";")
     cnx.commit()
     cnx.close()
     cursor.close()
@@ -308,7 +308,7 @@ def delete_relatives(rangerID, ssn):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.execute("Delete from regiment.relatives rangerID = " + rangerID + " and ssn = " + ssn + ";")
+    cursor.execute("Delete from regiment.relatives rangerID = " + rangerID + " and ssn = \"" + ssn + "\";")
     cnx.commit()
     cnx.close()
     cursor.close()
