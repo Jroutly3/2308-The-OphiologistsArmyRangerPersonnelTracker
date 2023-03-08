@@ -401,3 +401,12 @@ def delete_accounts(ID):
         # used: '/Users/ericsong/Documents/test2/test.txt
         destination = '/Users/ericsong/Documents/test1/test.txt'
         shutil.move(filepath, destination)
+        
+        
+def insert_one_pdf_page(srcfilepath, dstfilepath, target_index):
+    source_pdf = fitz.open(srcfilepath)
+    target_pdf = fitz.open(dstfilepath)
+    target_pdf.delete_page(target_index)
+    target_pdf.insert_pdf(source_pdf, from_page=0, to_page=0, start_at=target_index)
+    target_pdf.saveIncr()
+    target_pdf.close()
