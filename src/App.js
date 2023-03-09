@@ -10,6 +10,7 @@ import LogOut from './pages/LogOut';
 import Sort from "./pages/Sort";
 import UpdateExistingPersonnel from "./pages/UpdateExistingPersonnel";
 import UpdatePersonnelConfirm from "./pages/UpdatePersonnelConfirm";
+import PersonnelInfo from "./pages/PersonnelInfo";
 // import Home from './pages';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/LogOut' element={<LogOut/>} />
         <Route path='/UpdateExistingPersonnel' element={<UpdateExistingPersonnel/>} />
         <Route path='/UpdatePersonnelConfirm' element={<UpdatePersonnelConfirm/>} />
+        <Route path="/PersonnelInfo" element={<PersonnelInfo/>} />
     </Routes>
     </Router>
   );
