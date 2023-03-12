@@ -25,7 +25,7 @@ const Sort = () => {
   //console.log(sorted)
   function sayHello() {
     sorted.sort((a,b) => a.unit - b.unit);
-    if (sortField == false) {
+    if (sortField === false) {
       setsortField(true);
     } else {
       setsortField(false);
@@ -35,7 +35,7 @@ const Sort = () => {
   }
   function sortName() {
     sorted.sort((a,b) => a.DODID - b.DODID);
-    if (sortShow == false) {
+    if (sortShow === false) {
       setsortShow(true);
     } else {
       setsortShow(false);

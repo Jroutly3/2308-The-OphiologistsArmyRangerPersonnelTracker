@@ -1,7 +1,11 @@
+
+
 .card {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    text-emphasis: none;
+    text-decoration: none;
 }
 
 .test > div {

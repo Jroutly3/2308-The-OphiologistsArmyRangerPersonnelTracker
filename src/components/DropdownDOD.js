@@ -4,9 +4,8 @@ import {
   StyledSelect,
   StyledOption,
   StyledLabel,
-  StyledButton,
 } from "./dropDownDODstyle";
-import initialDetails from '../data/initialDetails';
+// import initialDetails from '../data/initialDetails';
 
 export function Dropdown(props) {
   

@@ -12,10 +12,6 @@ function Card({person}) {
             <p>{person.name}</p>
             <p>{person.unit}</p>
             <p>{person.DODID}</p>
-            <p>{person.Birthdate}</p>
-            <p>{person.ssn}</p>
-            <p>{person.Address}</p>
-            <p>{person.Status}</p>
         </Link>
     </div>
     )
