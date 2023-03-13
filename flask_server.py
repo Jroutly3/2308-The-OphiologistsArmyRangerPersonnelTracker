@@ -394,10 +394,64 @@ def delete_accounts(ID):
     cnx.close()
     cursor.close()
 
-    # method to move file, given original filepath
-    # using placeholder filepaths for now
-    def move_file(filepath):
-        ## might need to check if filepath is valid
-        # used: '/Users/ericsong/Documents/test2/test.txt
-        destination = '/Users/ericsong/Documents/test1/test.txt'
-        shutil.move(filepath, destination)
+# method to move file, given original filepath as string
+# using placeholder filepaths for now
+def move_file(filepath):
+    if os.path.exists(filepath):
+        extension = os.path.splitext(filepath)[-1].lower()
+        print(extension)
+        if extension == ".pdf":
+            # used: '/Users/ericsong/Documents/test2/test.txt'
+            destination = '/Users/ericsong/Documents/test1/test.txt'
+            shutil.move(filepath, destination)
+        else:
+            return "File is not a pdf"
+    else:
+        return "Files do not exist"
+
+# given pdf filepath as string, delete source file
+def delete_source_file(filepath):
+    if os.path.exists(filepath):
+        extension = os.path.splitext(filepath)[-1].lower()
+        if extension == ".pdf":
+            # additional security measures possible here
+            os.remove(filepath)
+        else:
+            return "File is not a pdf"
+    else:
+        return "File does not exist"
+        
+        
+def insert_one_pdf_page_safe(srcfilepath, dstfilepath, target_index):
+    source_pdf = fitz.open(srcfilepath)
+    target_pdf = fitz.open(dstfilepath)
+    target_pdf.delete_page(target_index)
+    target_pdf.insert_pdf(source_pdf, from_page=0, to_page=0, start_at=target_index)
+    target_pdf.saveIncr()
+    target_pdf.close()
+
+def insert_pdf_pages_safe(srcfilepath, dstfilepath, target_index):
+    source_pdf = fitz.open(srcfilepath)
+    target_pdf = fitz.open(dstfilepath)
+    try:
+        target_pdf.delete_pages(target_index, target_index + len(source_pdf) - 1)
+    except ValueError:
+        return "Invalid size or index"
+    target_pdf.insert_pdf(source_pdf, from_page=-1, to_page=-1, start_at=target_index)
+    source_pdf.close()
+    target_pdf.saveIncr()
+    target_pdf.close()
+
+
+def insert_pdf_pages(srcfilepath, dstfilepath, target_index):
+    source_pdf = fitz.open(srcfilepath)
+    target_pdf = fitz.open(dstfilepath)
+    try:
+        target_pdf.delete_pages(target_index, target_index + len(source_pdf) - 1)
+    except ValueError:
+        return "Invalid size or index"
+    target_pdf.insert_pdf(source_pdf, from_page=-1, to_page=-1, start_at=target_index)
+    source_pdf.close()
+    delete_source_file(srcfilepath)
+    target_pdf.saveIncr()
+    target_pdf.close()
