@@ -3,6 +3,24 @@ This project provides a database to hold the information and documents of soldie
 
 # Release Notes
 
+## Version 0.3.0
+### Features:
+- Added ability to add data to existing tables in database and modifying currently stored data
+ 
+- Implemented method to move pdf files and replace consecutive pdf pages with pages from another file
+
+- Individual personnel pages created for each person in database, including capability to upload pdf under individual selected
+
+### Bug Fixes: 
+- Fixed sorted data view to be properly aligned
+
+- Fixed issue where selecting any ranger would send user to individual page of one ranger
+
+- Format checking for various fields of data entry corrected
+
+### Known Issues:
+N/A
+
 ## Version 0.2.0
 ### Features:
 
@@ -12,15 +30,16 @@ This project provides a database to hold the information and documents of soldie
 
  - Created server intermediary between UI and database, restricts database access to provided procedures
 
-### Bug Fixes
+### Bug Fixes:
 
  - Search bar modified to no longer not show results if results are set to be permanently visible
 
  - Table view modified such that data shown in table is no longer unaligned due to length differences of input strings
 
- ### Known Issues
+ ### Known Issues:
  
  - Server intermediary currently does not allow connections outside of host
+ 
  - The front end does not properly align sorted data
 
 ## Version 0.1.0
@@ -33,7 +52,7 @@ This project provides a database to hold the information and documents of soldie
     
 -   Created basic frontend mockup
 
-### Bug Fixes
+### Bug Fixes:
 
 N/A
 
