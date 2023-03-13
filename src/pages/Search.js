@@ -24,14 +24,7 @@ function Search({details = initialDetails.initialDetails}) {
       "Status": "Status"
     };
 
-    var letterStyle = {
-      padding: 10,
-      margin: 10,
-      display: "inline-block",
-      fontFamily: "monospace",
-      fontSize: 24,
-      textAlign: "center"
-  };
+   
 
     const filteredPersons = details.filter(
         person => {
@@ -63,7 +56,7 @@ function Search({details = initialDetails.initialDetails}) {
     }
 
     return (
-        <section className="garamond" style={letterStyle}>
+        <section className="garamond">
           <div className="navy georgia ma0 grow">
             <h2 className="f2">Personnel Search</h2>
           </div>
@@ -92,4 +85,14 @@ const testperson = {
       "location": "Location",
       "DODID": "DODID"
     }
-    <Card key={testperson.id} person = {testperson}/>*/
+    <Card key={testperson.id} person = {testperson}/>
+    
+    
+     var letterStyle = {
+      padding: 10,
+      margin: 10,
+      display: "inline-block",
+      fontFamily: "monospace",
+      fontSize: 24,
+      textAlign: "center"
+  };*/

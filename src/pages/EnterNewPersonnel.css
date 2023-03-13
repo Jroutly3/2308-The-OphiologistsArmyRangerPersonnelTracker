@@ -1,0 +1,29 @@
+body {
+    padding: 20px;
+    letter-spacing: 1px;
+  }
+  
+  .active {
+    font-weight: bold;
+  }
+  
+  .register-form {
+    margin-top: 20px;
+  }
+  
+  .form-details {
+    margin-top: 20px;
+  }
+  
+  .form-details > div {
+    margin: 10px;
+  }
+
+ .button-prime {
+  border: solid 2px black;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  display: flex;
+  margin-top: 15px;
+  max-width: 25%;
+ }

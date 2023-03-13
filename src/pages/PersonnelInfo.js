@@ -1,14 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 import './PersonnelInfo.css';
 import { useLocation } from 'react-router-dom'
+import axios from 'axios';
 
 const PersonnelInfo = (props) => {
+  const [file, setFile] = useState()
+
+  function handleChange(event) {
+    setFile(event.target.files[0])
+  }
   //console.log(props);
   //console.log(props.location);
   const location = useLocation()
   const { from } = location.state
   //console.log(location);
   console.log(from);
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    const url = 'http://localhost:3000/uploadFile';
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', file.name);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    axios.post(url, formData, config).then((response) => {
+      console.log(response.data);
+    });
+
+  }
     return (
       <div className="Personnel">
         <h1>
@@ -21,6 +44,11 @@ const PersonnelInfo = (props) => {
         <p className="info">SSN: {from.ssn}</p>
         <p className="info">Address: {from.Address}</p>
         <p className="info">Status: {from.Status}</p>
+        <form onSubmit={handleSubmit}>
+          <h1>React File Upload</h1>
+          <input type="file" onChange={handleChange}/>
+          <button type="submit">Upload</button>
+        </form>
       </div>
     );
   };
