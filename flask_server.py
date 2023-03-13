@@ -422,10 +422,36 @@ def delete_source_file(filepath):
         return "File does not exist"
         
         
-def insert_one_pdf_page(srcfilepath, dstfilepath, target_index):
+def insert_one_pdf_page_safe(srcfilepath, dstfilepath, target_index):
     source_pdf = fitz.open(srcfilepath)
     target_pdf = fitz.open(dstfilepath)
     target_pdf.delete_page(target_index)
     target_pdf.insert_pdf(source_pdf, from_page=0, to_page=0, start_at=target_index)
+    target_pdf.saveIncr()
+    target_pdf.close()
+
+def insert_pdf_pages_safe(srcfilepath, dstfilepath, target_index):
+    source_pdf = fitz.open(srcfilepath)
+    target_pdf = fitz.open(dstfilepath)
+    try:
+        target_pdf.delete_pages(target_index, target_index + len(source_pdf) - 1)
+    except ValueError:
+        return "Invalid size or index"
+    target_pdf.insert_pdf(source_pdf, from_page=-1, to_page=-1, start_at=target_index)
+    source_pdf.close()
+    target_pdf.saveIncr()
+    target_pdf.close()
+
+
+def insert_pdf_pages(srcfilepath, dstfilepath, target_index):
+    source_pdf = fitz.open(srcfilepath)
+    target_pdf = fitz.open(dstfilepath)
+    try:
+        target_pdf.delete_pages(target_index, target_index + len(source_pdf) - 1)
+    except ValueError:
+        return "Invalid size or index"
+    target_pdf.insert_pdf(source_pdf, from_page=-1, to_page=-1, start_at=target_index)
+    source_pdf.close()
+    delete_source_file(srcfilepath)
     target_pdf.saveIncr()
     target_pdf.close()
