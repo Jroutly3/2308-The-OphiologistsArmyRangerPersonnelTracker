@@ -223,7 +223,7 @@ def modify_ranger(dodID, field, data):
         case "livingstatus":
             if not isinstance(data, bool):
                 return "Data not a True/False value"
-        case "birthdate:
+        case "birthdate":
             dateregex = r'^\d{4}-\d{2}-\d{2}$'
             if not re.match(dateregex, data):
                 return "Data is not in XXXX-XX-XX format"
@@ -286,7 +286,7 @@ def modify_relatives(rangerID, ssn, field, data):
                 return "Data entered should be only letters"
             elif (len(data) > 20):
                 return "Relationship entered is too long"
-        case "birthdate:
+        case "birthdate":
             dateregex = r'^\d{4}-\d{2}-\d{2}$'
             if not re.match(dateregex, data):
                 return "Data is not in XXXX-XX-XX format"
@@ -394,13 +394,32 @@ def delete_accounts(ID):
     cnx.close()
     cursor.close()
 
-    # method to move file, given original filepath
-    # using placeholder filepaths for now
-    def move_file(filepath):
-        ## might need to check if filepath is valid
-        # used: '/Users/ericsong/Documents/test2/test.txt
-        destination = '/Users/ericsong/Documents/test1/test.txt'
-        shutil.move(filepath, destination)
+# method to move file, given original filepath as string
+# using placeholder filepaths for now
+def move_file(filepath):
+    if os.path.exists(filepath):
+        extension = os.path.splitext(filepath)[-1].lower()
+        print(extension)
+        if extension == ".pdf":
+            # used: '/Users/ericsong/Documents/test2/test.txt'
+            destination = '/Users/ericsong/Documents/test1/test.txt'
+            shutil.move(filepath, destination)
+        else:
+            return "File is not a pdf"
+    else:
+        return "Files do not exist"
+
+# given pdf filepath as string, delete source file
+def delete_source_file(filepath):
+    if os.path.exists(filepath):
+        extension = os.path.splitext(filepath)[-1].lower()
+        if extension == ".pdf":
+            # additional security measures possible here
+            os.remove(filepath)
+        else:
+            return "File is not a pdf"
+    else:
+        return "File does not exist"
         
         
 def insert_one_pdf_page(srcfilepath, dstfilepath, target_index):
