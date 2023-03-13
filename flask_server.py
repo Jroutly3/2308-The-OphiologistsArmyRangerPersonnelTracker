@@ -394,20 +394,20 @@ def delete_accounts(ID):
     cnx.close()
     cursor.close()
 
-# method to move file, given original filepath as string
-# using placeholder filepaths for now
-def move_file(filepath):
+# method to move file, given source and destination filepath as strings
+def move_file(filepath, destination):
     if os.path.exists(filepath):
         extension = os.path.splitext(filepath)[-1].lower()
         print(extension)
         if extension == ".pdf":
-            # used: '/Users/ericsong/Documents/test2/test.txt'
-            destination = '/Users/ericsong/Documents/test1/test.txt'
-            shutil.move(filepath, destination)
+            try:
+                shutil.move(filepath, destination)
+            except:
+                return "Destination filepath invalid"
         else:
-            return "File is not a pdf"
+            return "Source file is not a pdf"
     else:
-        return "Files do not exist"
+        return "Invalid source filepath or file does not exist"
 
 # given pdf filepath as string, delete source file
 def delete_source_file(filepath):
@@ -419,7 +419,7 @@ def delete_source_file(filepath):
         else:
             return "File is not a pdf"
     else:
-        return "File does not exist"
+        return "Invalid filepath or file does not exist"
         
         
 def insert_one_pdf_page_safe(srcfilepath, dstfilepath, target_index):
