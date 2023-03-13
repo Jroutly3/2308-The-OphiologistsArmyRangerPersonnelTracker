@@ -6,6 +6,7 @@ import re
 import os
 import shutil
 
+
 # app = Flask(__name__)
 
 # app.config['MYSQL_HOST'] = 'localhost'
@@ -56,23 +57,23 @@ def search_rangers_name(name):
 
 
 # Make sure input is explicitly 10 digits
-def search_rangers_id(id):
+def search_rangers_id(dodid):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc('searchID', [id])
+    cursor.callproc('searchID', [dodid])
     result = json_return_proc(cursor)
     cursor.close()
     return result
 
 
-def search_rangers_multifield(name, id):
+def search_rangers_multifield(name, dodid):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc('searchMultifield', [id, name])
+    cursor.callproc('searchMultifield', [dodid, name])
     result = json_return_proc(cursor)
     cursor.close()
     return result
@@ -83,7 +84,7 @@ def show_ranger_srps():
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    #cursor = get_cursor()
+    # cursor = get_cursor()
     cursor.execute("SELECT * FROM regiment.rangersrps;")
     result = json_return_select(cursor)
     cursor.close()
@@ -232,7 +233,7 @@ def modify_ranger(dodID, field, data):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     if ((field == "dodID") | (field == "ssn") | (field == "livingstatus")):
-        cursor.execute("Update regiment.rangers set " + field + " = " + data + " where dodID = " + dodID +";")
+        cursor.execute("Update regiment.rangers set " + field + " = " + data + " where dodID = " + dodID + ";")
     else:
         cursor.execute("Update regiment.rangers set " + field + " = \"" + data + "\" where dodID = " + dodID + ";")
     cnx.commit()
@@ -249,6 +250,7 @@ def delete_ranger(ssn):
     cnx.commit()
     cnx.close()
     cursor.close()
+
 
 def modify_relatives(rangerID, ssn, field, data):
     match field:
@@ -295,9 +297,11 @@ def modify_relatives(rangerID, ssn, field, data):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     if (field == "rangerID"):
-        cursor.execute("Update regiment.relatives set " + field + " = " + data + " where rangerID = " + rangerID + " and ssn = \"" + ssn + "\";")
+        cursor.execute(
+            "Update regiment.relatives set " + field + " = " + data + " where rangerID = " + rangerID + " and ssn = \"" + ssn + "\";")
     else:
-        cursor.execute("Update regiment.relatives set " + field + " = \"" + data + "\" where rangerID = " + rangerID + " and ssn = \"" + ssn + "\";")
+        cursor.execute(
+            "Update regiment.relatives set " + field + " = \"" + data + "\" where rangerID = " + rangerID + " and ssn = \"" + ssn + "\";")
     cnx.commit()
     cnx.close()
     cursor.close()
@@ -313,7 +317,8 @@ def delete_relatives(rangerID, ssn):
     cnx.close()
     cursor.close()
 
-#This currently modifies entries in the srp_file table, not that actual srp pdf
+
+# This currently modifies entries in the srp_file table, not that actual srp pdf
 def modify_srp_files(srpID, filename, field, data):
     match field:
         case "filename":
@@ -336,15 +341,17 @@ def modify_srp_files(srpID, filename, field, data):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     if (field == "srpID"):
-        cursor.execute("Update regiment.srp_files set " + field + " = " + data + " where srpId = " + srpID + " and filename = \"" + filename + "\";")
+        cursor.execute(
+            "Update regiment.srp_files set " + field + " = " + data + " where srpId = " + srpID + " and filename = \"" + filename + "\";")
     else:
-        cursor.execute("Update regiment.srp_files set " + field + " = \"" + data + "\" where srpID = " + srpID + " and filename = \"" + filename + "\";")
+        cursor.execute(
+            "Update regiment.srp_files set " + field + " = \"" + data + "\" where srpID = " + srpID + " and filename = \"" + filename + "\";")
     cnx.commit()
     cnx.close()
     cursor.close()
 
 
-#This currently deletes entries in the srp_file table, not that actual srp pdf
+# This currently deletes entries in the srp_file table, not that actual srp pdf
 def delete_srp_files(srpID, filename):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -355,8 +362,8 @@ def delete_srp_files(srpID, filename):
     cnx.close()
     cursor.close()
 
-    
-#This will need to be modified when security features are implented
+
+# This will need to be modified when security features are implented
 def modify_accounts(ID, field, data):
     match field:
         case "rangerpassword":
@@ -383,7 +390,7 @@ def modify_accounts(ID, field, data):
     cursor.close()
 
 
-#This will need to be modified when security features are implented
+# This will need to be modified when security features are implented
 def delete_accounts(ID):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
