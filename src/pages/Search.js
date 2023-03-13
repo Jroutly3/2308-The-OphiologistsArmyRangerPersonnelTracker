@@ -55,9 +55,20 @@ function Search({details = initialDetails.initialDetails}) {
       }
     }
 
+    var letterStyle = {
+      padding: 10,
+      justifyContent:'center',
+      alignItems:'center',
+      display: 'flex',
+    }
+
+    var backGround = {
+      backgroundColor: '#EBF7F5'
+    }
+
     return (
-        <section className="garamond">
-          <div className="navy georgia ma0 grow">
+        <section className="garamond" style={backGround}>
+          <div className="navy georgia ma0 grow" style={letterStyle}>
             <h2 className="f2">Personnel Search</h2>
           </div>
           <div className="pa2">
@@ -66,6 +77,7 @@ function Search({details = initialDetails.initialDetails}) {
               type = "search" 
               placeholder = "Search People" 
               onChange = {handleChange}
+              style={letterStyle}
             />
             
           </div>

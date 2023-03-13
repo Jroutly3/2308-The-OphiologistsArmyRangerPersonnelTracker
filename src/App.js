@@ -14,20 +14,25 @@ import UpdatePersonnelConfirm from "./pages/UpdatePersonnelConfirm";
 // import Home from './pages';
 
 function App() {
+  var backGround = {
+    backgroundColor: '#EBF7F5'
+  }
   return (
+    <div style={backGround}>
     <Router>
     <Navbar />
     <Routes>
-        <Route path='/EnterNewPersonnel' element={<EnterNewPersonnel/>} />
-        <Route path='/Search' element={<Search/>} />
-        <Route path='/Sort/*' element={<Sort/>} />
-        <Route path='/LogOut' element={<LogOut/>} />
-        <Route path='/UpdateExistingPersonnel' element={<UpdateExistingPersonnel/>} />
-        <Route path='/UpdatePersonnelConfirm' element={<UpdatePersonnelConfirm/>} />
-        <Route path="/PersonnelInfo" element={<PersonnelInfo/>} />
+        <Route path='/EnterNewPersonnel' element={<EnterNewPersonnel/>} style={backGround}/>
+        <Route path='/Search' element={<Search/>} style={backGround} />
+        <Route path='/Sort/*' element={<Sort/>} style={backGround} />
+        <Route path='/LogOut' element={<LogOut/>} style={backGround} />
+        <Route path='/UpdateExistingPersonnel' element={<UpdateExistingPersonnel/>} style={backGround} />
+        <Route path='/UpdatePersonnelConfirm' element={<UpdatePersonnelConfirm/>} style={backGround} />
+        <Route path="/PersonnelInfo" element={<PersonnelInfo/>} style={backGround} />
         
     </Routes>
     </Router>
+    </div>
   );
 }
 //<Route path="/PersonnelInfo" element={<PersonnelInfo/>} />  Personnel = {initialDetails.initialDetails[1]} render={(props) => <PersonnelInfo {...props}

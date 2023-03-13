@@ -8,7 +8,7 @@ import Card from "../components/Card";
 const Sort = () => {
   const [sortField, setsortField] = useState(false);
    const [sortShow, setsortShow] = useState(false); 
-
+  console.log(initialDetails.initialDetails);
    const testperson = {
     "id": 0,
     "unit": "Company",
@@ -50,12 +50,18 @@ const Sort = () => {
     </Scroll>
     )
   }
+  var letterStyle = {
+    padding: 10,
+    justifyContent:'center',
+    alignItems:'center',
+    display: 'flex',
+  }
   return (
     <section className="garamond">
-          <div className="navy georgia ma0 grow">
+          <div className="navy georgia ma0 grow" style={letterStyle}>
             <h2 className="f2">Personnel Sort</h2>
           </div>
-          <button onClick={sayHello}>Sort by Company</button>
+          <button onClick={sayHello} >Sort by Company</button>
           <button onClick={sortName}>Sort by DODID</button>
           {totalSort()}
         </section>
