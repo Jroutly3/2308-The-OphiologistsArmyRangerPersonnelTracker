@@ -5,7 +5,7 @@ import mysql.connector
 import re
 import os
 import shutil
-
+import fitz
 
 # app = Flask(__name__)
 
