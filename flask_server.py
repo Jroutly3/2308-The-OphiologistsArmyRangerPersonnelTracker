@@ -6,6 +6,7 @@ import re
 import os
 import shutil
 import fitz
+import hashlib
 
 # app = Flask(__name__)
 
@@ -462,3 +463,14 @@ def insert_pdf_pages(srcfilepath, dstfilepath, target_index):
     delete_source_file(srcfilepath)
     target_pdf.saveIncr()
     target_pdf.close()
+    
+    
+def init_hash_password(password):
+    salt = os.urandom(16)
+    hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
+    return (hash_value, salt)
+
+def hash_password(password, salt):
+    hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
+    return (hash_value)
+
