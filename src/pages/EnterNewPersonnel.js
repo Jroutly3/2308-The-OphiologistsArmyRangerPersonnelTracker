@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './EnterNewPersonnel.css';
+// import initialDetails from '../data/initialDetails.json'
 
 const EnterNewPersonnel = props => {
   const [state, setState] = useState({
-    username: "",
-    email: "",
-    city: "",
-    phone: ""
+    Rank: "",
+    Company: "",
+    Name: "",
+    SSN: "",
+    DODID: "",
+    Birthdate: "",
+    Address: "",
+    Status: ""
   });
 
   const handleInputChange = event => {
@@ -20,12 +25,15 @@ const EnterNewPersonnel = props => {
   };
   
   var letterStyle = {
-    padding: 10
+    padding: 10,
+    justifyContent:'center',
+    alignItems:'left',
+    display: 'flex',
   }
 
   return (
     <div>
-      <h1>Enter New Perssonel</h1>
+      <h1 className="letterStyle">Enter New Perssonel</h1>
       <Form className="register-form">
         <Form.Group controlId="Rank" style={letterStyle}>
           <Form.Label>Rank:  </Form.Label>
@@ -59,7 +67,7 @@ const EnterNewPersonnel = props => {
           <Form.Control
             type="text"
             placeholder="Enter ssn"
-            name="ssn"
+            name="SSN"
             onChange={handleInputChange}
           />
         </Form.Group>
@@ -99,19 +107,30 @@ const EnterNewPersonnel = props => {
             onChange={handleInputChange}
           />
         </Form.Group>
-
+        <div style={letterStyle}>
         <Link
-          className="button-prime"
-          to={{
-            pathname: "/UpdatePersonnelConfirm",
-            state
-          }}
+          className="btn-prime"
+          to= "/UpdatePersonnelConfirm"
+          state={{ from: state }}
+  
         >
           Register
         </Link>
+        </div>
       </Form>
     </div>
   );
 };
 
 export default EnterNewPersonnel;
+
+/*<Link
+          className="button-prime"
+          to={{
+            pathname: "/UpdatePersonnelConfirm",
+            state
+          }}
+          onClick = {console.log(state)}
+        >
+          Register
+        </Link>*/

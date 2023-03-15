@@ -48,7 +48,7 @@ const UpdateExistingPersonnel = () => {
         <OptionSelect value= "Ssn" />
         <OptionSelect value= "Birthdate" />
         <OptionSelect value= "Address" />
-        <OptionSelect value= "Living" />
+        <OptionSelect value= "Status" />
       </DropdownSelect>
     </div>
   );

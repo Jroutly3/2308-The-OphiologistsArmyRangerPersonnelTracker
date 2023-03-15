@@ -45,7 +45,7 @@ const PersonnelInfo = (props) => {
         <p className="info">Address: {from.Address}</p>
         <p className="info">Status: {from.Status}</p>
         <form onSubmit={handleSubmit}>
-          <h1>React File Upload</h1>
+          <h1>File Upload</h1>
           <input type="file" onChange={handleChange}/>
           <button type="submit">Upload</button>
         </form>

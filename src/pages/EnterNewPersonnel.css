@@ -1,5 +1,4 @@
 body {
-    padding: 20px;
     letter-spacing: 1px;
   }
   
@@ -19,7 +18,7 @@ body {
     margin: 10px;
   }
 
- .button-prime {
+ .btn-prime {
   border: solid 2px black;
   padding: 0.5rem;
   border-radius: 1rem;
@@ -27,3 +26,11 @@ body {
   margin-top: 15px;
   max-width: 25%;
  }
+
+ .letterStyle {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
