@@ -182,8 +182,6 @@ def add_account(ip_ID, ip_rangerpassword, ip_IsAdmin):
     cursor.callproc('add_account', [ip_ID, ip_rangerpassword, salt, ip_IsAdmin])
     cnx.commit()
     cursor.close()
-    
-#add_account('1234512345', 'test', False)
 
 
 ##Method for pulling unique key for soldiers for dropdowns

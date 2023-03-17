@@ -108,7 +108,7 @@ delimiter ;
 
 drop procedure if exists add_account;
 delimiter //
-create procedure add_account(in ip_ID char(10), in ip_rangerpassword char(64), in ip_salt char(16), in ip_IsAdmin boolean)
+create procedure add_account(in ip_ID char(10), in ip_rangerpassword char(64), in ip_salt char(32), in ip_IsAdmin boolean)
 sp_main: begin
 	if ((ip_ID in (select ID from accounts)) or (ip_ID not in (select dodID from rangers)))
     then leave sp_main; end if;
