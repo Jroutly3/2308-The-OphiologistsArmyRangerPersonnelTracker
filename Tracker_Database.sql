@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS accounts;
 CREATE TABLE accounts (
 	ID char(10) not null,
     rangerpassword char(64) not null,
-    salt char(16) not null,
+    salt char(32) not null,
     IsAdmin boolean not null,
     primary key (ID),
 	CONSTRAINT login_fk1 foreign key (ID) references rangers (dodID) on delete cascade on update cascade
