@@ -468,9 +468,10 @@ def insert_pdf_pages(srcfilepath, dstfilepath, target_index):
 def init_hash_password(password):
     salt = os.urandom(16)
     hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
-    return (hash_value, salt)
+    hexsalt = salt.hex()
+    return (hash_value, hexsalt)
 
-def hash_password(password, salt):
+def hash_password(password, hexsalt):
+    salt = bytes.fromhex((hexsalt))
     hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
     return (hash_value)
-
