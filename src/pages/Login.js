@@ -1,34 +1,9 @@
 import React, { useState } from "react";
-import './App.css';
-import Search from './pages/Search';
-//import initialDetails from './data/initialDetails';
-import { BrowserRouter as Router, Routes, Route}
-    from 'react-router-dom';
-import Navbar from "./components/Navbar";
-import EnterNewPersonnel from './pages/EnterNewPersonnel';
-import LogOut from './pages/LogOut';
-import Sort from "./pages/Sort";
-import UpdateExistingPersonnel from "./pages/UpdateExistingPersonnel";
-import UpdatePersonnelConfirm from "./pages/UpdatePersonnelConfirm";
- import PersonnelInfo from "./pages/PersonnelInfo";
-import Login from './pages/Login';
-import Welcome from "./pages/Welcome";
+import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 
-
-function App() {
-
-  var backGround = {
-    backgroundColor: '#EBF7F5'
-  }
-  var logstyle = {
-    backgroundColor: '#EBF7F5',
-    padding: 10,
-    justifyContent:'center',
-    alignItems:'center',
-    display: 'flex',
-  }
-  const [errorMessages, setErrorMessages] = useState({});
+function Login() {
+    const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
   
     // User Login info
@@ -81,7 +56,7 @@ function App() {
 
     // JSX code for login form
    const renderForm = (
-     <div className="form" style={logstyle}>
+     <div className="form">
        <form onSubmit={handleSubmit}>
          <div className="input-container">
            <label>Username </label>
@@ -100,36 +75,13 @@ function App() {
      </div>
    );
 
-   const loggs = (
+   return (
     <div className="login-form">
-        <div className="title" style={logstyle}>Sign In</div>
+        <div className="title">Sign In</div>
         
         {isSubmitted ? <Link to="/Welcome">Enter site </Link> : renderForm}
     </div>
-   )
-
-   const logins = (<div style={backGround}>
-    <Router>
-    <Navbar />
-    <Routes>
-        <Route path='/EnterNewPersonnel' element={<EnterNewPersonnel/>} style={backGround}/>
-        <Route path='/Search' element={<Search/>} style={backGround} />
-        <Route path='/Sort/*' element={<Sort/>} style={backGround} />
-        <Route path='/LogOut' element={<LogOut/>} style={backGround} />
-        <Route path='/UpdateExistingPersonnel' element={<UpdateExistingPersonnel/>} style={backGround} />
-        <Route path='/UpdatePersonnelConfirm' element={<UpdatePersonnelConfirm/>} style={backGround} />
-        <Route path="/PersonnelInfo" element={<PersonnelInfo/>} style={backGround} />
-        <Route path="/" element = {<Welcome/>} style={backGround} />
-    </Routes>
-    </Router>
-    </div>)
-
-  return (
-    <div>
-      {isSubmitted ? logins : loggs}
-    </div>
   );
 }
-//<Route path="/PersonnelInfo" element={<PersonnelInfo/>} />  Personnel = {initialDetails.initialDetails[1]} render={(props) => <PersonnelInfo {...props}
-
-export default App;
+//{isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+export default Login;
