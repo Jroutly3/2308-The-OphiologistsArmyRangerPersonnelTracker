@@ -15,7 +15,7 @@ CREATE TABLE rangers (
     birthdate date not null,
     address varchar(40) not null,
     company varchar(10) not null,
-    livingstatus enum('PDY', 'Leave', 'School') not null,
+    rangerstatus enum('PDY', 'Leave', 'School') not null,
     milrank enum('Private', 'Private First Class', 'Corporal', 'Specialist', 'Sergeant', 'Staff Sergeant', 'Sergeant First Class',
     'Master Sergeant', 'First Sergeant', 'Sergeant Major', 'Command Sergeant Major', 'Sergeant Major of the Army', 
     'Second Lieutenant', 'First Lieutenant', 'Captain', 'Major', 'Lieutenant Colonel', 'Colonel', 'Brigadier General', 'Major General',
