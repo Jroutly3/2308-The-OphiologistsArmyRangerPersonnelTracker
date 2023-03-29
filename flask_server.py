@@ -163,12 +163,12 @@ def add_relative(ip_fname, ip_mname, ip_lname, ip_ssn, ip_rangerID, ip_birthdate
     cursor.close()
 
 
-def add_srp(ip_filename, ip_file_location, ip_srpID, ip_file_date):
+def add_srp(ip_filename, ip_file_location, ip_srpID, ip_file_date, ip_days_until_out_of_date):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc('add_srp', [ip_filename, ip_file_location, ip_srpID, ip_file_date])
+    cursor.callproc('add_srp', [ip_filename, ip_file_location, ip_srpID, ip_file_date, ip_days_until_out_of_date])
     cnx.commit()
     cursor.close()
 
@@ -348,6 +348,9 @@ def modify_srp_files(srpID, filename, field, data):
             dateregex = r'^\d{4}-\d{2}-\d{2}$'
             if not re.match(dateregex, data):
                 return "Data is not in XXXX-XX-XX format"
+        case "days_until_out_of_date":
+            if (data.isnumeric() == False):
+                return "Data entered should be only numbers"
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
