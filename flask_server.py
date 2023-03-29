@@ -475,6 +475,17 @@ def insert_pdf_pages(srcfilepath, dstfilepath, target_index):
     target_pdf.saveIncr()
     target_pdf.close()
     
+def init_hash_password(password):
+    salt = os.urandom(16)
+    hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
+    hexsalt = salt.hex()
+    return (hash_value, hexsalt)
+
+def hash_password(password, hexsalt):
+    salt = bytes.fromhex((hexsalt))
+    hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
+    return (hash_value)
+
 def logIn(dodID, passwordinput):
     if (dodID.isnumeric() == False):
         return "Data entered should be only numbers"
@@ -497,3 +508,4 @@ def logIn(dodID, passwordinput):
         return (adminstatus, milrank)
     else:
         return "Password is invalid"
+
