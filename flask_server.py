@@ -35,6 +35,16 @@ def json_return_proc(cursor):
     result = json.dumps(jsondata, default=str)
     return result
 
+def init_hash_password(password):
+    salt = os.urandom(16)
+    hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
+    hexsalt = salt.hex()
+    return (hash_value, hexsalt)
+
+def hash_password(password, hexsalt):
+    salt = bytes.fromhex((hexsalt))
+    hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
+    return (hash_value)
 
 def json_return_select(cursor):
     row_headers = [x[0] for x in cursor.description]
@@ -164,11 +174,12 @@ def add_srp(ip_filename, ip_file_location, ip_srpID, ip_file_date):
 
 
 def add_account(ip_ID, ip_rangerpassword, ip_IsAdmin):
+    (ip_rangerpassword, salt) = init_hash_password(ip_rangerpassword)
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.callproc('add_account', [ip_ID, ip_rangerpassword, ip_IsAdmin])
+    cursor.callproc('add_account', [ip_ID, ip_rangerpassword, salt, ip_IsAdmin])
     cnx.commit()
     cursor.close()
 
@@ -464,7 +475,6 @@ def insert_pdf_pages(srcfilepath, dstfilepath, target_index):
     target_pdf.saveIncr()
     target_pdf.close()
     
-    
 def init_hash_password(password):
     salt = os.urandom(16)
     hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
@@ -475,3 +485,27 @@ def hash_password(password, hexsalt):
     salt = bytes.fromhex((hexsalt))
     hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
     return (hash_value)
+
+def logIn(dodID, passwordinput):
+    if (dodID.isnumeric() == False):
+        return "Data entered should be only numbers"
+    elif (len(dodID) != 10):
+        return "ID entered is not correct length"
+    cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT rangerpassword, salt, IsAdmin, milrank from regiment.accounts join regiment.rangers on dodID = ID where ID = " + dodID)
+    result = cursor.fetchall()
+    if len(result) == 0:
+        return "No account registered for DOD ID"
+    dbpassword = result[0][0]
+    salt = result[0][1]
+    adminstatus = result[0][2]
+    milrank = result[0][3]
+    passwordinput = hash_password(passwordinput, salt)
+    if (passwordinput == dbpassword):
+        return (adminstatus, milrank)
+    else:
+        return "Password is invalid"
+

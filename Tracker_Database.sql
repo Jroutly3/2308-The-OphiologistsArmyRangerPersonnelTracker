@@ -31,13 +31,13 @@ DROP TABLE IF EXISTS accounts;
 CREATE TABLE accounts (
 	ID char(10) not null,
     rangerpassword char(64) not null,
-    salt char(16) not null,
+    salt char(32) not null,
     IsAdmin boolean not null,
     primary key (ID),
 	CONSTRAINT login_fk1 foreign key (ID) references rangers (dodID) on delete cascade on update cascade
     );
     
-    insert into accounts values ('1234567890', '8f3a511d285261635c4dca95c3e4decb692ab58d7cb814d14822617374999789', 'abcdefghijklnmop', false);
+    insert into accounts values ('1234567890', '638e36e39305586db3c06d0b8ef1a7aec05023f659eeae451a44279f73249a97', '6162636465666768696A6B6C6E6D6F70', false);
     
 DROP TABLE IF EXISTS srp_files;
 CREATE TABLE srp_files (
@@ -108,7 +108,7 @@ delimiter ;
 
 drop procedure if exists add_account;
 delimiter //
-create procedure add_account(in ip_ID char(10), in ip_rangerpassword char(64), in ip_salt char(16), in ip_IsAdmin boolean)
+create procedure add_account(in ip_ID char(10), in ip_rangerpassword char(64), in ip_salt char(32), in ip_IsAdmin boolean)
 sp_main: begin
 	if ((ip_ID in (select ID from accounts)) or (ip_ID not in (select dodID from rangers)))
     then leave sp_main; end if;
