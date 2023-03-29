@@ -233,9 +233,6 @@ def modify_ranger(dodID, field, data):
                 return "Data entered should be only letters"
             elif (len(data) > 40):
                 return "Company entered is too long"
-        case "livingstatus":
-            if not isinstance(data, bool):
-                return "Data not a True/False value"
         case "birthdate":
             dateregex = r'^\d{4}-\d{2}-\d{2}$'
             if not re.match(dateregex, data):
@@ -244,7 +241,7 @@ def modify_ranger(dodID, field, data):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    if ((field == "dodID") | (field == "ssn") | (field == "livingstatus")):
+    if ((field == "dodID") | (field == "ssn") | (field == "rangerstatus")):
         cursor.execute("Update regiment.rangers set " + field + " = " + data + " where dodID = " + dodID + ";")
     else:
         cursor.execute("Update regiment.rangers set " + field + " = \"" + data + "\" where dodID = " + dodID + ";")
