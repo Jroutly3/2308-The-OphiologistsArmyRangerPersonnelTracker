@@ -15,7 +15,7 @@ CREATE TABLE rangers (
     birthdate date not null,
     address varchar(40) not null,
     company varchar(10) not null,
-	livingstatus boolean not null,
+    rangerstatus enum('PDY', 'Leave', 'School') not null,
     milrank enum('Private', 'Private First Class', 'Corporal', 'Specialist', 'Sergeant', 'Staff Sergeant', 'Sergeant First Class',
     'Master Sergeant', 'First Sergeant', 'Sergeant Major', 'Command Sergeant Major', 'Sergeant Major of the Army', 
     'Second Lieutenant', 'First Lieutenant', 'Captain', 'Major', 'Lieutenant Colonel', 'Colonel', 'Brigadier General', 'Major General',
@@ -25,7 +25,7 @@ CREATE TABLE rangers (
     ); 
     
     insert into rangers values ('John', 'Placeholder', 'Smith', '111-11-1111', '1234567890', '1997-04-09', '7372 Milquetoast Rd','07', True, 'First Lieutenant')
-    , ('Smith', 'Angle', 'John', '222-22-2222', '1231231231', '1990-08-07', '4273 Boring Dr', '07', True, 'Master Sergeant'); 
+    , ('Smith', 'Angle', 'John', '222-22-2222', '1231231231', '1990-08-07', '4273 Boring Dr', '07', 'PDY', 'Master Sergeant'); 
     
 DROP TABLE IF EXISTS accounts;
 CREATE TABLE accounts (
@@ -173,6 +173,15 @@ select * from regiment.rangers order by company;
 
 create or replace view sortRank as
 select * from regiment.rangers order by milrank;
+
+create or replace view sortPDY as
+select * from regiment.rangers where rangerstatus = 'PDY';
+
+create or replace view sortLeave as
+select * from regiment.rangers where rangerstatus = 'Leave';
+
+create or replace view sortSchool as
+select * from regiment.rangers where rangerstatus = "School";
 
 create or replace view rangersrps as
 select fname, mname, lname, dodID, filename, file_location, file_date from regiment.rangers

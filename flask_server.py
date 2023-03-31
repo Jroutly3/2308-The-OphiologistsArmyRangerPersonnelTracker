@@ -233,9 +233,6 @@ def modify_ranger(dodID, field, data):
                 return "Data entered should be only letters"
             elif (len(data) > 40):
                 return "Company entered is too long"
-        case "livingstatus":
-            if not isinstance(data, bool):
-                return "Data not a True/False value"
         case "birthdate":
             dateregex = r'^\d{4}-\d{2}-\d{2}$'
             if not re.match(dateregex, data):
@@ -244,7 +241,7 @@ def modify_ranger(dodID, field, data):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    if ((field == "dodID") | (field == "ssn") | (field == "livingstatus")):
+    if ((field == "dodID") | (field == "ssn") | (field == "rangerstatus")):
         cursor.execute("Update regiment.rangers set " + field + " = " + data + " where dodID = " + dodID + ";")
     else:
         cursor.execute("Update regiment.rangers set " + field + " = \"" + data + "\" where dodID = " + dodID + ";")
@@ -478,6 +475,17 @@ def insert_pdf_pages(srcfilepath, dstfilepath, target_index):
     target_pdf.saveIncr()
     target_pdf.close()
     
+def init_hash_password(password):
+    salt = os.urandom(16)
+    hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
+    hexsalt = salt.hex()
+    return (hash_value, hexsalt)
+
+def hash_password(password, hexsalt):
+    salt = bytes.fromhex((hexsalt))
+    hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
+    return (hash_value)
+
 def logIn(dodID, passwordinput):
     if (dodID.isnumeric() == False):
         return "Data entered should be only numbers"
@@ -500,3 +508,4 @@ def logIn(dodID, passwordinput):
         return (adminstatus, milrank)
     else:
         return "Password is invalid"
+
