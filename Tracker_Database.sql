@@ -45,12 +45,13 @@ CREATE TABLE srp_files (
     file_location varchar(100) not null,
     srpID char(10) not null,
     file_date date not null,
+    days_until_out_of_date int not null,
     primary key (srpID, filename),
     CONSTRAINT srp_fk1 foreign key (srpID) references rangers (dodID) on delete cascade on update cascade
     );
     
-    insert into srp_files values ('srp112024', 'C:/Dummy/DummyFolder/Srp_Files/srp112024.pdf', '1234567890', '2022-11-22'), 
-    ('out_of_date_srp', 'C:/Dummy/DummyFolder/Srp_Files/out_of_date_srp.pdf', '1231231231', '2010-09-08');
+    insert into srp_files values ('srp112024', 'C:/Dummy/DummyFolder/Srp_Files/srp112024.pdf', '1234567890', '2022-11-22', 365), 
+    ('out_of_date_srp', 'C:/Dummy/DummyFolder/Srp_Files/out_of_date_srp.pdf', '1231231231', '2010-09-08', 180);
     
 DROP TABLE IF EXISTS relatives;
 CREATE TABLE relatives (
@@ -69,7 +70,7 @@ CREATE TABLE relatives (
     insert into relatives values ('Mary', 'Redlohecalp', 'Smith', '987-65-4321', '1234567890', '1998-02-02', '7372 Milquetoast Rd', 'Spouse');
     
 create or replace view display_out_of_date_srps as
-select * from srp_files where file_date not between DATE_SUB(CURDATE(),INTERVAL (1/2) YEAR) AND CURDATE();
+select * from srp_files where file_date not between DATE_SUB(CURDATE(),INTERVAL (days_until_out_of_date) DAY) AND CURDATE();
 
 drop procedure if exists add_ranger;
 delimiter //
@@ -98,11 +99,11 @@ delimiter ;
 drop procedure if exists add_srp;
 delimiter //
 create procedure add_srp (in ip_filename varchar(30), in ip_file_location varchar(100),
-	in ip_srpID char(10), in ip_file_date date)
+	in ip_srpID char(10), in ip_file_date date, ip_days_until_out_of_date int)
 sp_main: begin
     if ((ip_filename in (select filename from srp_files where srpID = ip_srpID)) or ip_srpID not in (select dodID from rangers))
     then leave sp_main; end if;
-    insert into srp_files values (ip_filename, ip_file_location, ip_srpID, ip_file_date);
+    insert into srp_files values (ip_filename, ip_file_location, ip_srpID, ip_file_date, ip_days_until_out_of_date);
 end //
 delimiter ;
 
