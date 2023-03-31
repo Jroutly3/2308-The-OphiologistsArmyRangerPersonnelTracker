@@ -66,6 +66,16 @@ def search_rangers_name(name):
     cursor.close()
     return result
 
+def search_rangers_name_restricted(name, milranknum):
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc('searchRestrictedName', [name, milranknum])
+    result = json_return_proc(cursor)
+    cursor.close()
+    return result
+
 
 # Make sure input is explicitly 10 digits
 def search_rangers_id(dodid):
@@ -74,6 +84,16 @@ def search_rangers_id(dodid):
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
     cursor.callproc('searchID', [dodid])
+    result = json_return_proc(cursor)
+    cursor.close()
+    return result
+
+def search_rangers_id_restricted(dodid, milranknum):
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc('searchRestrictedID', [dodid, milranknum])
     result = json_return_proc(cursor)
     cursor.close()
     return result
@@ -89,6 +109,15 @@ def search_rangers_multifield(name, dodid):
     cursor.close()
     return result
 
+def search_rangers_multifield_restricted(name, dodid, milranknum):
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.callproc('searchRestrictedMultifield', [dodid, name, milranknum])
+    result = json_return_proc(cursor)
+    cursor.close()
+    return result
 
 def show_ranger_srps():
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
@@ -139,6 +168,26 @@ def show_rangers(sortName, sortID, sortCompany):
     cursor.close()
     return result
 
+def show_rangers_restricted(sortName, sortID, sortCompany, milranknum):
+    query = "SELECT * FROM regiment.rangers where milrank <= " + str(milranknum)
+    if sortName | sortID | sortCompany:
+        query = query + " order by"
+        if sortName:
+            query = query + " lname,"
+        if sortID:
+            query = query + " DODid,"
+        if sortCompany:
+            query = query + " company,"
+        query = query[:-1]
+    query = query + ";"
+    cnx = mysql.connector.connect(user='root', password='password',
+                                  host='127.0.0.1',
+                                  database='regiment', port=3306)
+    cursor = cnx.cursor()
+    cursor.execute(query)
+    result = json_return_select(cursor)
+    cursor.close()
+    return result
 
 def add_ranger(ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
@@ -495,7 +544,7 @@ def logIn(dodID, passwordinput):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.execute("SELECT rangerpassword, salt, IsAdmin, milrank from regiment.accounts join regiment.rangers on dodID = ID where ID = " + dodID)
+    cursor.execute("SELECT rangerpassword, salt, IsAdmin, milrank, milrank+0, fname, mname, lname from regiment.accounts join regiment.rangers on dodID = ID where ID = " + dodID)
     result = cursor.fetchall()
     if len(result) == 0:
         return "No account registered for DOD ID"
@@ -503,9 +552,14 @@ def logIn(dodID, passwordinput):
     salt = result[0][1]
     adminstatus = result[0][2]
     milrank = result[0][3]
+    milranknum = result[0][4]
+    if result[0][6] != None:
+        name = result[0][5] + " " + result[0][6] + " " + result[0][7]
+    else:
+        name = result[0][5] + " " + result[0][7]
     passwordinput = hash_password(passwordinput, salt)
     if (passwordinput == dbpassword):
-        return (adminstatus, milrank)
+        return (adminstatus, milrank, milranknum, name)
     else:
         return "Password is invalid"
 
