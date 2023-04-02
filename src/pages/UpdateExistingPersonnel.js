@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import './EnterNewPersonnel.css';
 import { Dropdown, Option } from "../components/DropdownDOD";
 import initialDetails from '../data/initialDetails';
 import { DropdownSelect, OptionSelect } from '../components/DropdownSelector'
@@ -7,22 +10,21 @@ const UpdateExistingPersonnel = () => {
   var letterStyle = {
     padding: 10,
     margin: 10,
-    display: "inline-block",
-    fontFamily: "monospace",
-    fontSize: 24,
-    textAlign: "center"
+    textAlign: "center",
+    justifyContent:'center'
 };
   return (
     <div style={letterStyle}>
-      <h1>
+      <h1 style={letterStyle}>
         Update Existing Personnel
       </h1>
       <Dropdown
         formLabel="Select the user's DODID"
         buttonText="Submit"
-        action= "/UpdatePersonnelConfirm" 
+        action= "/UpdatePersonnelConfirm"
+        style={letterStyle} 
       >
-        <Option selected value="Click to see options" />
+        <Option selected value="Click to see options" style={letterStyle}/>
         <Option value= {initialDetails.initialDetails[0].DODID} />
         <Option value= {initialDetails.initialDetails[1].DODID} />
         <Option value= {initialDetails.initialDetails[2].DODID} />
@@ -39,9 +41,10 @@ const UpdateExistingPersonnel = () => {
       <DropdownSelect
         formLabel="What do you want to change?"
         buttonText="Submit"
-        action= "/UpdatePersonnelConfirm" 
+        action= "/UpdatePersonnelConfirm"
+        style={letterStyle} 
       >
-        <OptionSelect selected value="Click to see options" />
+        <OptionSelect selected value="Click to see options" style={letterStyle}/>
         <OptionSelect value= "Rank" />
         <OptionSelect value= "Unit" />
         <OptionSelect value= "Name" />
@@ -50,8 +53,11 @@ const UpdateExistingPersonnel = () => {
         <OptionSelect value= "Address" />
         <OptionSelect value= "Status" />
       </DropdownSelect>
+      <div style={{padding: 140}}></div>
     </div>
   );
+  /**/
+
 };
   
 export default UpdateExistingPersonnel;

@@ -83,6 +83,7 @@ function Search({details = initialDetails.initialDetails}) {
           </div>
           
           {searchList()}
+          <div style={{padding: 250}}></div>
         </section>
       );
 }

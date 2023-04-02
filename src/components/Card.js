@@ -8,10 +8,10 @@ function Card({person}) {
     return(
         <div className="tc bg-light-green dib br3 pa1 ma2 grow bw2 shadow-5 fl w-100" >
         <Link to="/PersonnelInfo" state={{ from: person }} className="card">
-            <p>{person.Rank}</p>
-            <p>{person.name}</p>
-            <p>{person.unit}</p>
-            <p>{person.DODID}</p>
+            <p style={{maxWidth:"25%", minWidth:"25%", textAlign:"left"}}>{person.Rank}</p>
+            <p style={{maxWidth:"25%", minWidth:"25%", textAlign:"left"}}>{person.name}</p>
+            <p style={{maxWidth:"25%", minWidth:"25%", textAlign:"left"}}>{person.unit}</p>
+            <p style={{maxWidth:"25%", minWidth:"25%", textAlign:"left"}}>{person.DODID}</p>
         </Link>
     </div>
     )
