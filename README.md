@@ -3,6 +3,20 @@ This project provides a database to hold the information and documents of soldie
 
 # Release Notes
 
+## Version 0.4.0
+### Features:
+- Added clearance restrictions depending on ranger rank and admin status
+
+- Added login and logout capabilities
+
+- Added dashboard welcome screen
+### Bug Fixes:
+- Fixed issue where registering a ranger would register twice
+
+- Fixed status field to store correct ranger activity values
+### Known Issues:
+N/A
+
 ## Version 0.3.0
 ### Features:
 - Added ability to add data to existing tables in database and modifying currently stored data
