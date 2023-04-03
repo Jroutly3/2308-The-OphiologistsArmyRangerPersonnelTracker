@@ -126,6 +126,14 @@ sp_main: begin
 end //
 delimiter ;
 
+drop procedure if exists searchRestrictedName;
+delimiter //
+create procedure searchRestrictedName(in ip_name varchar(62), in ip_milrank int)
+sp_main: begin
+	select * from regiment.rangers where milrank <= ip_milrank and ((concat(fname, ' ', mname, ' ', lname) like concat('%', ip_name, '%')) or (concat(fname, ' ', lname) like concat('%', ip_name, '%')));
+end //
+delimiter ;
+
 drop procedure if exists searchID;
 delimiter //
 create procedure searchID(in ip_dodID char(10))
@@ -134,11 +142,27 @@ sp_main: begin
 end //
 delimiter ;
 
+drop procedure if exists searchRestrictedID;
+delimiter //
+create procedure searchRestrictedID(in ip_dodID char(10), in ip_milrank int)
+sp_main: begin
+	select * from regiment.rangers where milrank <= ip_milrank and (dodID = ip_dodID);
+end //
+delimiter ;
+
 drop procedure if exists searchMultifield;
 delimiter //
 create procedure searchMultifield(in ip_dodID char(10), in ip_name varchar(62))
 sp_main: begin
 	select * from regiment.rangers where (dodID = ip_dodID) and (concat(fname, ' ', mname, ' ', lname) like concat('%', ip_name, '%')) or (concat(fname, ' ', lname) like concat('%', ip_name, '%'));
+end //
+delimiter ;
+
+drop procedure if exists searchRestrictedMultifield;
+delimiter //
+create procedure searchRestrictedMultifield(in ip_dodID char(10), in ip_name varchar(62), in ip_milrank int)
+sp_main: begin
+	select * from regiment.rangers where milrank <= ip_milrank and (dodID = ip_dodID) and (concat(fname, ' ', mname, ' ', lname) like concat('%', ip_name, '%')) or (concat(fname, ' ', lname) like concat('%', ip_name, '%'));
 end //
 delimiter ;
 
