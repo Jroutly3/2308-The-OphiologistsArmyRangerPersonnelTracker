@@ -11,6 +11,8 @@ export const StyledSelect = styled.select`
   height: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
+  margin-left: 25%;
+  justify-content:center;
 `;
 
 export const StyledOption = styled.option`

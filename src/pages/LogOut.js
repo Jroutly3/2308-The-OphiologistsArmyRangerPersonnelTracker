@@ -1,10 +1,12 @@
 import React from "react";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 //import Python from "../Python";
   
 
 //var perf = require('./Python.html');
 
-class LogOut extends React.Component {
+/*class LogOut extends React.Component {
   render(){
      return (
       <div>
@@ -12,5 +14,17 @@ class LogOut extends React.Component {
     </div>
      );
   }
+}*/
+function LogOut() {
+  function refreshPage(){
+    window.location.reload();
+} 
+  return(
+    <div>
+    <Link to="/" onClick={refreshPage}>Log Out</Link>
+    <div style={{padding:325}}></div>
+    </div>
+  );
 }
+
 export default LogOut;

@@ -28,6 +28,15 @@ function App() {
     alignItems:'center',
     display: 'flex',
   }
+
+  var padstyle = {
+    backgroundColor: '#EBF7F5',
+    padding: 50,
+  }
+  var logpadstyle = {
+    backgroundColor: '#EBF7F5',
+    padding: 500,
+  }
   const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
   
@@ -102,9 +111,11 @@ function App() {
 
    const loggs = (
     <div className="login-form">
+        <div style={padstyle}></div>
         <div className="title" style={logstyle}>Sign In</div>
         
         {isSubmitted ? <Link to="/Welcome">Enter site </Link> : renderForm}
+        <div style={logpadstyle}></div>
     </div>
    )
 

@@ -118,6 +118,7 @@ const EnterNewPersonnel = props => {
         </Link>
         </div>
       </Form>
+      <div style={{padding: 100}}></div>
     </div>
   );
 };
