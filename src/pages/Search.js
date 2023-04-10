@@ -47,7 +47,7 @@ function Search({details = initialDetails.initialDetails}) {
     function searchList() {
       if (searchShow) {
         return(
-            <Scroll>
+            <Scroll style={{paddingLeft: 10}}>
                 <Card key={testperson.id} person = {testperson}/>
                 <SearchList filteredPersons={filteredPersons}/>
             </Scroll>
@@ -57,6 +57,7 @@ function Search({details = initialDetails.initialDetails}) {
 
     var letterStyle = {
       padding: 10,
+      marginLeft: 5,
       justifyContent:'center',
       alignItems:'center',
       display: 'flex',
