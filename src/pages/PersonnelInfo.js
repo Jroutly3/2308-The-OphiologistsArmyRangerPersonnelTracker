@@ -32,8 +32,16 @@ const PersonnelInfo = (props) => {
     });
 
   }
-    return (
-      <div className="Personnel">
+  var allow
+
+  if (from.Rank === "General") {
+    allow = false
+  } else {
+    allow = true
+  }
+
+  const allowed = (
+    <div className="Personnel">
         <h1>
           Personnel Info:
         </h1>
@@ -49,7 +57,20 @@ const PersonnelInfo = (props) => {
           <input type="file" onChange={handleChange}/>
           <button type="submit">Upload</button>
         </form>
+        <div style={{padding: 80}}></div>
       </div>
+  )
+
+  const disallow = (
+    <div className="Personnel">
+      <h1>Access Denied</h1>
+      <div style={{padding: 220}}></div>
+    </div>
+  )
+    return (
+      <div>
+      {allow ? allowed : disallow}
+    </div>
     );
   };
     

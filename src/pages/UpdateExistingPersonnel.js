@@ -11,7 +11,7 @@ const UpdateExistingPersonnel = () => {
     padding: 10,
     margin: 10,
     textAlign: "center",
-    justifyContent:'center'
+    justifyContent:'center',
 };
   return (
     <div style={letterStyle}>
