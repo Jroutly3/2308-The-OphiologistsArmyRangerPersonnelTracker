@@ -9,7 +9,7 @@
       "DODID": "1234567890",
       "Birthdate": "09/17/77",
       "Address": "1 North Sierra Drive Winter Garden, FL 34787",
-      "Status": "Living"
+      "Status": "PDY"
     },
     {
       "id": 2,
@@ -20,7 +20,7 @@
       "DODID": "9876543210",
       "Birthdate": "01/04/61",
       "Address": "9319 Beech St. Selden, NY 11784",
-      "Status": "Living"
+      "Status": "PDY"
     },
     {
       "id": 3,
@@ -31,7 +31,7 @@
       "DODID": "4200244242",
       "Birthdate": "01/11/01",
       "Address": "8578 Water Lane Neptune, NJ 07753",
-      "Status": "Living"
+      "Status": "Leave"
     },
     {
       "id": 4,
@@ -42,7 +42,7 @@
       "DODID": "9999199999",
       "Birthdate": "09/04/74",
       "Address": "123 Hanover Drive Holly Springs, NC 27540",
-      "Status": "Living"
+      "Status": "School"
     },
     {
       "id": 5,
@@ -53,7 +53,7 @@
       "DODID": "6969696969",
       "Birthdate": "10/25/84",
       "Address": "225 Church Rd. Erie, PA 16506",
-      "Status": "Living"
+      "Status": "PDY"
     },
     {
       "id": 6,
@@ -64,7 +64,7 @@
       "DODID": "3333333333",
       "Birthdate": "09/30/78",
       "Address": "40 Penn St. Lawrenceville, GA 30043",
-      "Status": "Living"
+      "Status": "Leave"
     },
     {
       "id": 7,
@@ -75,7 +75,7 @@
       "DODID": "1248163264",
       "Birthdate": "11/10/73",
       "Address": "69 Hawthorne Dr. Rocklin, CA 95677",
-      "Status": "Living"
+      "Status": "PDY"
     },
     {
       "id": 8,
@@ -86,7 +86,7 @@
       "DODID": "0112358132",
       "Birthdate": "12/12/66",
       "Address": "143 Cedarwood St. Merrick, NY 11566",
-      "Status": "Living"
+      "Status": "School"
     },
     {
       "id": 9,
@@ -97,7 +97,7 @@
       "DODID": "9638527410",
       "Birthdate": "01/10/85",
       "Address": "9294 Gulf Street Holland, MI 49423",
-      "Status": "Living"
+      "Status": "PDY"
     },
     {
       "id": 10,
@@ -108,7 +108,7 @@
       "DODID": "0147258369",
       "Birthdate": "04/09/89",
       "Address": "942 W. Sunnyslope Street Omaha, NE 68107",
-      "Status": "Living"
+      "Status": "PDY"
     },
     {
       "id": 11,
@@ -119,7 +119,7 @@
       "DODID": "0000010001",
       "Birthdate": "11/25/82",
       "Address": "8267 Lexington Street Mc Lean, VA 22101",
-      "Status": "Living"
+      "Status": "School"
     },
     {
       "id": 12,
@@ -130,7 +130,7 @@
       "DODID": "7777777777",
       "Birthdate": "06/24/60",
       "Address": "478 Brickell St. Grand Island, NE 68801",
-      "Status": "Living"
+      "Status": "PDY"
     }
   ]
   }

@@ -33,7 +33,7 @@ const EnterNewPersonnel = props => {
 
   return (
     <div>
-      <h1 className="letterStyle">Enter New Perssonel</h1>
+      <h1 className="letterStyle">Enter New Personnel</h1>
       <Form className="register-form">
         <Form.Group controlId="Rank" style={letterStyle}>
           <Form.Label>Rank:  </Form.Label>
@@ -100,12 +100,14 @@ const EnterNewPersonnel = props => {
         </Form.Group>
         <Form.Group controlId="Status" style={letterStyle}>
           <Form.Label>Status: </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter Status"
+          <Form.Select
             name="Status"
-            onChange={handleInputChange}
-          />
+            onChange={handleInputChange}>
+              <option value="Unselected">Select Status</option>
+              <option value="PDY">PDY</option>
+              <option value="School">School</option>
+              <option value="Leave">Leave</option>
+            </Form.Select>
         </Form.Group>
         <div style={letterStyle}>
         <Link
@@ -125,6 +127,13 @@ const EnterNewPersonnel = props => {
 
 export default EnterNewPersonnel;
 
+/*<Form.Control
+            type="text"
+            placeholder="Enter Status"
+            name="Status"
+            onChange={handleInputChange}
+          />
+*/
 /*<Link
           className="button-prime"
           to={{

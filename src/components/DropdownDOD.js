@@ -10,7 +10,7 @@ import {
 export function Dropdown(props) {
   var letterStyle = {
     textAlign: "center",
-    justifyContent:'center'
+    justifyContent:'center',
 };
   return (
     <div style={letterStyle}>
@@ -29,7 +29,7 @@ export function Dropdown(props) {
 export function Option(props) {
   var letterStyle = {
     textAlign: "center",
-    justifyContent:'center'
+    justifyContent:'center',
 };
   return (
     <StyledOption selected={props.selected} style={letterStyle}>

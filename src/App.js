@@ -49,6 +49,10 @@ function App() {
       {
         username: "regularuser",
         password: "passreg"
+      },
+      {
+        username: "1",
+        password: "1"
       }
     ];
 

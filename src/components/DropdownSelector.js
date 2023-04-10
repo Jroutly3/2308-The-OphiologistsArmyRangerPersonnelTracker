@@ -11,7 +11,7 @@ import {
 export function DropdownSelect(props) {
   var letterStyle = {
     textAlign: "center",
-    justifyContent:'center'
+    justifyContent:'center',
 };
   return (
     <DropdownWrapper action={props.action} style={letterStyle}>
@@ -25,6 +25,7 @@ export function DropdownSelect(props) {
               className="StyledButton"
               type = "search" 
               placeholder = "New value"
+              style={{maxWidth:"50%", marginLeft:"25%"}}
             />
       <StyledButton type="submit" value={props.buttonText} style={{textAlign:"center", justifyContent:"center", padding: 10, margin:10, marginLeft:"25%"}}/>
     </DropdownWrapper>
@@ -33,7 +34,7 @@ export function DropdownSelect(props) {
 // [Name, Rank, Unit, Ssn, Birthdate, Address, Status]
 export function OptionSelect(props) {
   return (
-    <StyledOption selected={props.selected} style={{justifyContent:'center'}}>
+    <StyledOption selected={props.selected} style={{justifyContent:'center', maxWidth:"50%"}}>
       {props.value}
     </StyledOption>
   );
