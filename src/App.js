@@ -16,6 +16,32 @@ import Welcome from "./pages/Welcome";
 import { Link } from "react-router-dom";
 
 
+
+
+const database = [
+  {
+    username: "admin",
+    password: "passadmin",
+    unit: "u" 
+  },
+  {
+    username: "regularuser",
+    password: "passreg",
+    unit: ["3", "5", "7"]
+  },
+  {
+    username: "1",
+    password: "1",
+    unit: "1"
+  }
+];
+
+var loggeduser = {
+  username: "",
+  password: "",
+  unit: "" 
+}
+
 function App() {
 
   var backGround = {
@@ -41,20 +67,7 @@ function App() {
     const [isSubmitted, setIsSubmitted] = useState(false);
   
     // User Login info
-    const database = [
-      {
-        username: "admin",
-        password: "passadmin"
-      },
-      {
-        username: "regularuser",
-        password: "passreg"
-      },
-      {
-        username: "1",
-        password: "1"
-      }
-    ];
+    
 
     const errors = {
         uname: "invalid username",
@@ -66,12 +79,12 @@ function App() {
         if (isSubmitted === false) {
             event.preventDefault();
         }
-        
-    
+      
         var { uname, pass } = document.forms[0];
     
         // Find user login info
         const userData = database.find((user) => user.username === uname.value);
+        loggeduser = userData;
     
         // Compare user info
         if (userData) {
@@ -148,3 +161,7 @@ function App() {
 //<Route path="/PersonnelInfo" element={<PersonnelInfo/>} />  Personnel = {initialDetails.initialDetails[1]} render={(props) => <PersonnelInfo {...props}
 
 export default App;
+
+export function currentuser() {
+  return loggeduser
+}
