@@ -11,7 +11,7 @@ import Sort from "./pages/Sort";
 import UpdateExistingPersonnel from "./pages/UpdateExistingPersonnel";
 import UpdatePersonnelConfirm from "./pages/UpdatePersonnelConfirm";
  import PersonnelInfo from "./pages/PersonnelInfo";
-import Login from './pages/Login';
+import Python from "./pages/Python";
 import Welcome from "./pages/Welcome";
 import { Link } from "react-router-dom";
 
@@ -147,7 +147,8 @@ function App() {
         <Route path='/UpdateExistingPersonnel' element={<UpdateExistingPersonnel/>} style={backGround} />
         <Route path='/UpdatePersonnelConfirm' element={<UpdatePersonnelConfirm/>} style={backGround} />
         <Route path="/PersonnelInfo" element={<PersonnelInfo/>} style={backGround} />
-        <Route path="/" element = {<Welcome/>} style={backGround} />
+        <Route path="/Welcome" element = {<Welcome/>} style={backGround} />
+        <Route path="/Python" element = {<Python/>} style={backGround} />
     </Routes>
     </Router>
     </div>)
