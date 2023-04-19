@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './PersonnelInfo.css';
 import { useLocation } from 'react-router-dom'
 import axios from 'axios';
+import { currentuser } from "../App";
 
 const PersonnelInfo = (props) => {
   const [file, setFile] = useState()
@@ -32,11 +33,20 @@ const PersonnelInfo = (props) => {
     });
 
   }
-  var allow
-
-  if (from.Rank === "General") {
-    allow = false
-  } else {
+  var allow;
+  const user = currentuser();
+  var i = 0;
+  while(i < user.unit.length) {
+    if (from.unit !== user.unit[i]) {
+      allow = false
+    } else {
+      allow = true
+      i = user.unit.length
+    }
+    i++;
+  }
+  
+  if (user.unit === 'u') {
     allow = true
   }
 

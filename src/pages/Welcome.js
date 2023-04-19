@@ -1,5 +1,6 @@
 import React,{ Image } from "react";
 import logo from '../logo.png';
+//import { currentuser } from "../App";
 
 function Welcome() {
     var welcome = {
@@ -16,7 +17,6 @@ function Welcome() {
         alignItems:'center',
         display: 'flex',
     }
-    //
     return(
         <div>
             <div style={wrap}>
