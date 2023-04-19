@@ -1,5 +1,5 @@
-from flask import Flask, jsonify
-from flask_mysqldb import MySQL
+#from flask import Flask, jsonify
+#from flask_mysqldb import MySQL
 import json
 import mysql.connector
 import re
@@ -562,4 +562,3 @@ def logIn(dodID, passwordinput):
         return (adminstatus, milrank, milranknum, name)
     else:
         return "Password is invalid"
-
