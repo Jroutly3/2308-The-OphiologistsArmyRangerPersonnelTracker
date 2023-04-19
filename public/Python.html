@@ -3,8 +3,6 @@
     <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <py-env>
-      - Flask
-      - flask
       - jsonify
       - MySQL
       - json
@@ -13,10 +11,9 @@
   </head>
   <body>
     <py-script>
-      from flask import Flask, jsonify
-from flask_mysqldb import MySQL
-import json
-import mysql.connector
+    from flask_mysqldb import MySQL
+    import json
+    import mysql.connector
 
 
 # app = Flask(__name__)
