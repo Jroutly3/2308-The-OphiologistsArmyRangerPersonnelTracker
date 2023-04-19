@@ -15,28 +15,29 @@ CREATE TABLE rangers (
     birthdate date not null,
     address varchar(40) not null,
     company varchar(10) not null,
-    livingstatus boolean not null,
+    rangerstatus enum('PDY', 'Leave', 'School') not null,
     milrank enum('Private', 'Private First Class', 'Corporal', 'Specialist', 'Sergeant', 'Staff Sergeant', 'Sergeant First Class',
     'Master Sergeant', 'First Sergeant', 'Sergeant Major', 'Command Sergeant Major', 'Sergeant Major of the Army', 
     'Second Lieutenant', 'First Lieutenant', 'Captain', 'Major', 'Lieutenant Colonel', 'Colonel', 'Brigadier General', 'Major General',
     'Lieutenant General', 'General', 'General of the Army') not null,
-    primary key (dodID),
+    primary key (dodID), 
     unique key (ssn)
-    );
+    ); 
     
     insert into rangers values ('John', 'Placeholder', 'Smith', '111-11-1111', '1234567890', '1997-04-09', '7372 Milquetoast Rd','07', True, 'First Lieutenant')
-    , ('Smith', 'Angle', 'John', '222-22-2222', '1231231231', '1990-08-07', '4273 Boring Dr', '07', True, 'Master Sergeant'); 
+    , ('Smith', 'Angle', 'John', '222-22-2222', '1231231231', '1990-08-07', '4273 Boring Dr', '07', 'PDY', 'Master Sergeant'); 
     
 DROP TABLE IF EXISTS accounts;
 CREATE TABLE accounts (
 	ID char(10) not null,
-    rangerpassword varchar(30) not null,
+    rangerpassword char(64) not null,
+    salt char(32) not null,
     IsAdmin boolean not null,
     primary key (ID),
-	CONSTRAINT login_fk1 foreign key (ID) references rangers (dodID)
+	CONSTRAINT login_fk1 foreign key (ID) references rangers (dodID) on delete cascade on update cascade
     );
     
-    insert into accounts values ('1234567890', 'password', false);
+    insert into accounts values ('1234567890', '638e36e39305586db3c06d0b8ef1a7aec05023f659eeae451a44279f73249a97', '6162636465666768696A6B6C6E6D6F70', false);
     
 DROP TABLE IF EXISTS srp_files;
 CREATE TABLE srp_files (
@@ -44,12 +45,13 @@ CREATE TABLE srp_files (
     file_location varchar(100) not null,
     srpID char(10) not null,
     file_date date not null,
+    days_until_out_of_date int not null,
     primary key (srpID, filename),
-    CONSTRAINT srp_fk1 foreign key (srpID) references rangers (dodID)
+    CONSTRAINT srp_fk1 foreign key (srpID) references rangers (dodID) on delete cascade on update cascade
     );
     
-    insert into srp_files values ('srp112024', 'C:/Dummy/DummyFolder/Srp_Files/srp112024.pdf', '1234567890', '2022-11-22'), 
-    ('out_of_date_srp', 'C:/Dummy/DummyFolder/Srp_Files/out_of_date_srp.pdf', '1231231231', '2010-09-08');
+    insert into srp_files values ('srp112024', 'C:/Dummy/DummyFolder/Srp_Files/srp112024.pdf', '1234567890', '2022-11-22', 365), 
+    ('out_of_date_srp', 'C:/Dummy/DummyFolder/Srp_Files/out_of_date_srp.pdf', '1231231231', '2010-09-08', 180);
     
 DROP TABLE IF EXISTS relatives;
 CREATE TABLE relatives (
@@ -62,13 +64,13 @@ CREATE TABLE relatives (
     address varchar(40) not null,
     relationship varchar(20) not null,
     primary key (rangerID, ssn),
-    CONSTRAINT relatives_fk2 foreign key (rangerID) references rangers (dodID)
+    CONSTRAINT relatives_fk2 foreign key (rangerID) references rangers (dodID) on delete cascade on update cascade
     );
     
     insert into relatives values ('Mary', 'Redlohecalp', 'Smith', '987-65-4321', '1234567890', '1998-02-02', '7372 Milquetoast Rd', 'Spouse');
     
 create or replace view display_out_of_date_srps as
-select * from srp_files where file_date not between DATE_SUB(CURDATE(),INTERVAL (1/2) YEAR) AND CURDATE();
+select * from srp_files where file_date not between DATE_SUB(CURDATE(),INTERVAL (days_until_out_of_date) DAY) AND CURDATE();
 
 drop procedure if exists add_ranger;
 delimiter //
@@ -97,21 +99,21 @@ delimiter ;
 drop procedure if exists add_srp;
 delimiter //
 create procedure add_srp (in ip_filename varchar(30), in ip_file_location varchar(100),
-	in ip_srpID char(10), in ip_file_date date)
+	in ip_srpID char(10), in ip_file_date date, ip_days_until_out_of_date int)
 sp_main: begin
     if ((ip_filename in (select filename from srp_files where srpID = ip_srpID)) or ip_srpID not in (select dodID from rangers))
     then leave sp_main; end if;
-    insert into srp_files values (ip_filename, ip_file_location, ip_srpID, ip_file_date);
+    insert into srp_files values (ip_filename, ip_file_location, ip_srpID, ip_file_date, ip_days_until_out_of_date);
 end //
 delimiter ;
 
 drop procedure if exists add_account;
 delimiter //
-create procedure add_account(in ip_ID char(10), in ip_rangerpassword varchar(30), in ip_IsAdmin boolean)
+create procedure add_account(in ip_ID char(10), in ip_rangerpassword char(64), in ip_salt char(32), in ip_IsAdmin boolean)
 sp_main: begin
 	if ((ip_ID in (select ID from accounts)) or (ip_ID not in (select dodID from rangers)))
     then leave sp_main; end if;
-    insert into accounts values (ip_ID, ip_rangerpassword, ip_IsAdmin);
+    insert into accounts values (ip_ID, ip_rangerpassword, ip_salt, ip_IsAdmin);
 end //
 delimiter ;
 -- Empty inputs can be rendered as '' to not sort by that input
@@ -124,6 +126,14 @@ sp_main: begin
 end //
 delimiter ;
 
+drop procedure if exists searchRestrictedName;
+delimiter //
+create procedure searchRestrictedName(in ip_name varchar(62), in ip_milrank int)
+sp_main: begin
+	select * from regiment.rangers where milrank <= ip_milrank and ((concat(fname, ' ', mname, ' ', lname) like concat('%', ip_name, '%')) or (concat(fname, ' ', lname) like concat('%', ip_name, '%')));
+end //
+delimiter ;
+
 drop procedure if exists searchID;
 delimiter //
 create procedure searchID(in ip_dodID char(10))
@@ -132,11 +142,27 @@ sp_main: begin
 end //
 delimiter ;
 
+drop procedure if exists searchRestrictedID;
+delimiter //
+create procedure searchRestrictedID(in ip_dodID char(10), in ip_milrank int)
+sp_main: begin
+	select * from regiment.rangers where milrank <= ip_milrank and (dodID = ip_dodID);
+end //
+delimiter ;
+
 drop procedure if exists searchMultifield;
 delimiter //
 create procedure searchMultifield(in ip_dodID char(10), in ip_name varchar(62))
 sp_main: begin
 	select * from regiment.rangers where (dodID = ip_dodID) and (concat(fname, ' ', mname, ' ', lname) like concat('%', ip_name, '%')) or (concat(fname, ' ', lname) like concat('%', ip_name, '%'));
+end //
+delimiter ;
+
+drop procedure if exists searchRestrictedMultifield;
+delimiter //
+create procedure searchRestrictedMultifield(in ip_dodID char(10), in ip_name varchar(62), in ip_milrank int)
+sp_main: begin
+	select * from regiment.rangers where milrank <= ip_milrank and (dodID = ip_dodID) and (concat(fname, ' ', mname, ' ', lname) like concat('%', ip_name, '%')) or (concat(fname, ' ', lname) like concat('%', ip_name, '%'));
 end //
 delimiter ;
 
@@ -171,6 +197,15 @@ select * from regiment.rangers order by company;
 
 create or replace view sortRank as
 select * from regiment.rangers order by milrank;
+
+create or replace view sortPDY as
+select * from regiment.rangers where rangerstatus = 'PDY';
+
+create or replace view sortLeave as
+select * from regiment.rangers where rangerstatus = 'Leave';
+
+create or replace view sortSchool as
+select * from regiment.rangers where rangerstatus = "School";
 
 create or replace view rangersrps as
 select fname, mname, lname, dodID, filename, file_location, file_date from regiment.rangers
