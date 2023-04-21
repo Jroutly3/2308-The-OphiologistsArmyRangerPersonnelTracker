@@ -14,10 +14,10 @@ https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac
 ![Screenshot](InstructionPics.png)
 2. Open a File tab and go to downloads. From there, locate the zip file titled “2308-The-OphiologistsArmyRangerPersonnelTracker-Download.” Right click on the file and select “Extract All.” Make sure to remember where the files are being placed after being extracted. 
 3. Press Windows Key + R, then type "cmd," then press enter to open a command prompt.
-    a. This is intended to open a terminal. If you are facing issues opening a command prompt with the above instructions, you can also click the search option at the   bottom of your screen and type terminal 
+     - This is intended to open a terminal. If you are facing issues opening a command prompt with the above instructions, you can also click the search option at the   bottom of your screen and type terminal 
 4. From the command prompt, navigate to the project folder
-    a. You can use cd FOLDERNAME to enter a folder and cd .. to go back
-    b. An unzipped folder creates a folder within a folder, so you will need to enter the base folder and the folder within that to access the project.
+     - You can use cd FOLDERNAME to enter a folder and cd .. to go back
+     - An unzipped folder creates a folder within a folder, so you will need to enter the base folder and the folder within that to access the project.
 5. When you are in the project folder, type “npm install” and press enter. (This may take a few minutes to complete)
 6. To start the app, type “npm start” and press enter
 7. If you have a pop-up asking to allow access, click the box to allow private networks, but make sure allowing public networks is unchecked. Then click allow.
