@@ -11,6 +11,7 @@ https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac
 ### Download App instructions:
 
 1. Click on the tag link in the releases tab, located on the left side of github. Then, click the Final Release Tag and click the Source Code(zip) file. This will download the files.
+![Screenshot](InstructionPics.png)
 2. Open a File tab and go to downloads. From there, locate the zip file titled “2308-The-OphiologistsArmyRangerPersonnelTracker-Download.” Right click on the file and select “Extract All.” Make sure to remember where the files are being placed after being extracted. 
 3. Press Windows Key + R, then type "cmd," then press enter to open a command prompt.
     a. This is intended to open a terminal. If you are facing issues opening a command prompt with the above instructions, you can also click the search option at the   bottom of your screen and type terminal 
