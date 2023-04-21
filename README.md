@@ -21,6 +21,15 @@ https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac
 6. To start the app, type “npm start” and press enter
 7. If you have a pop-up asking to allow access, click the box to allow private networks, but make sure allowing public networks is unchecked. Then click allow.
 
+### MySQL
+
+1. Navigate to MySQL download (https://dev.mysql.com/downloads/installer/)
+2. Download the installer and use it
+3. Configure settings appropriately (default is fine) and proceed through installation
+4. Set root password for database
+5. Update password and socket accordingly in Python code
+6. MySQL installation should install “MySQL Workbench” alongside, but if not download that too
+
 ### Potential Issues:
 
 In the Prerequisite section, the website discusses chocolaty, which is a software needed to download npm. If you don’t know if you have chocolaty, the installer can handle downloading it for you. While following the download instructions, there will be a point where it gives you the option to install chocolaty, so click the box that accepts it when the option appears. 
