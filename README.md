@@ -1,6 +1,16 @@
 ﻿# Army Ranger Personnel Tracker
 This project provides a database to hold the information and documents of soldiers in a consolidated and secure fashion. This database can be searched and sorted by multiple criteria pertaining to soldiers, such as rank, company, or name. This function is provided through a secured frontend with login functionality, including account restrictions on what data can be accessed and edited based on the role and rank of the user logged in.
 
+## Installation Guide
+
+### MySQL
+1. Navigate to MySQL download (https://dev.mysql.com/downloads/installer/)
+2. Download the installer and use it
+3. Configure settings appropriately (default is fine) and proceed through installation
+4. Set root password for database
+5. Update password and socket accordingly in Python code
+6. MySQL installation should install “MySQL Workbench” alongside, but if not download that too
+
 # Release Notes
 
 ## Version 0.4.0
