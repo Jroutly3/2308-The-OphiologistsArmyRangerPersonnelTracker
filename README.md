@@ -36,7 +36,8 @@ In the Prerequisite section, the website discusses chocolaty, which is a softwar
 6. MySQL installation should install “MySQL Workbench” alongside, but if not download that too
 
 ### SQL Explanation:
-
+Running an SQL file will create a relational database on the computer that ran the file, so run the file on the computer that is intended to host the database. Only run the file once. Running it again may delete the database that was created and replace it with a new one, not keeping any changes, or cause other unintended consequences.
+To run an SQL file, first open MySQL Workbench and sign in to the server. Press and hold "ctrl + shift + o". Select and open the SQL file you want to run. Once you have done that, press and hold "ctrl + shift + enter" to run the file. This will create the database.
 
 # Release Notes
 
