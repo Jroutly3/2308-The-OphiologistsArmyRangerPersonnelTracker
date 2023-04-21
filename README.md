@@ -3,12 +3,13 @@ This project provides a database to hold the information and documents of soldie
 
 # Install Guide
 
-##Frontend Instructions
-	###Prerequisites:
+## Frontend Instructions
+### Prerequisites:
 You must be able to run npm commands. The website bellow contains instructions for downloading on both windows and mac. You can ignore everything on the website before Prerequisites.
 https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac
 
-###Download App instructions:
+### Download App instructions:
+
 1. Click on the tag link in the releases tab, located on the left side of github. Then, click the Final Release Tag and click the Source Code(zip) file. This will download the files.
 2. Open a File tab and go to downloads. From there, locate the zip file titled “2308-The-OphiologistsArmyRangerPersonnelTracker-Download.” Right click on the file and select “Extract All.” Make sure to remember where the files are being placed after being extracted. 
 3. Press Windows Key + R, then type "cmd," then press enter to open a command prompt.
@@ -20,7 +21,8 @@ https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac
 6. To start the app, type “npm start” and press enter
 7. If you have a pop-up asking to allow access, click the box to allow private networks, but make sure allowing public networks is unchecked. Then click allow.
 
-###Potential Issues:
+### Potential Issues:
+
 In the Prerequisite section, the website discusses chocolaty, which is a software needed to download npm. If you don’t know if you have chocolaty, the installer can handle downloading it for you. While following the download instructions, there will be a point where it gives you the option to install chocolaty, so click the box that accepts it when the option appears. 
 
 
