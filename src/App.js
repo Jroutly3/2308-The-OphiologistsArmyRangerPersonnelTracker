@@ -14,6 +14,7 @@ import UpdatePersonnelConfirm from "./pages/UpdatePersonnelConfirm";
 import Python from "./pages/Python";
 import Welcome from "./pages/Welcome";
 import { Link } from "react-router-dom";
+import NewPersonnelConfirm from "./pages/NewPersonnelConfirm";
 
 
 
@@ -27,12 +28,12 @@ const database = [
   {
     username: "regularuser",
     password: "passreg",
-    unit: ["3", "5", "7"]
+    unit: ["1", "3", "5", "7"]
   },
   {
     username: "1",
     password: "1",
-    unit: "1"
+    unit: ["1", "3", "5", "7"]
   }
 ];
 
@@ -131,7 +132,7 @@ function App() {
         <div style={padstyle}></div>
         <div className="title" style={logstyle}>Sign In</div>
         
-        {isSubmitted ? <Link to="/Welcome">Enter site </Link> : renderForm}
+        {isSubmitted ? <Link to="/PersonnelInfo">Enter site </Link> : renderForm}
         <div style={logpadstyle}></div>
     </div>
    )
@@ -146,8 +147,9 @@ function App() {
         <Route path='/LogOut' element={<LogOut/>} style={backGround} />
         <Route path='/UpdateExistingPersonnel' element={<UpdateExistingPersonnel/>} style={backGround} />
         <Route path='/UpdatePersonnelConfirm' element={<UpdatePersonnelConfirm/>} style={backGround} />
+        <Route path='/NewPersonnelConfirm' element={<NewPersonnelConfirm/>} style={backGround} />
         <Route path="/PersonnelInfo" element={<PersonnelInfo/>} style={backGround} />
-        <Route path="/Welcome" element = {<Welcome/>} style={backGround} />
+        <Route path="/" element = {<Welcome/>} style={backGround} />
         <Route path="/Python" element = {<Python/>} style={backGround} />
     </Routes>
     </Router>
