@@ -112,7 +112,7 @@ const EnterNewPersonnel = props => {
         <div style={letterStyle}>
         <Link
           className="btn-prime"
-          to= "/UpdatePersonnelConfirm"
+          to= "/NewPersonnelConfirm"
           state={{ from: state }}
   
         >
