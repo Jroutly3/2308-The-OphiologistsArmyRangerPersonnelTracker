@@ -1,5 +1,3 @@
-#from flask import Flask, jsonify
-#from flask_mysqldb import MySQL
 import json
 import mysql.connector
 import re
@@ -7,19 +5,6 @@ import os
 import shutil
 import fitz
 import hashlib
-
-# app = Flask(__name__)
-
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = 'Fl1ght413612!'
-# app.config['MYSQL_DB'] = 'regiment'
-
-# mysql = MySQL(app)
-# @app.route('/')
-# def get_cursor():
-#    with app.app_context():
-#        return mysql.connection.cursor()
 
 
 # When running database, remember to change database password to that of the current user's database
@@ -35,16 +20,19 @@ def json_return_proc(cursor):
     result = json.dumps(jsondata, default=str)
     return result
 
+
 def init_hash_password(password):
     salt = os.urandom(16)
     hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
     hexsalt = salt.hex()
     return (hash_value, hexsalt)
 
+
 def hash_password(password, hexsalt):
     salt = bytes.fromhex((hexsalt))
     hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
     return (hash_value)
+
 
 def json_return_select(cursor):
     row_headers = [x[0] for x in cursor.description]
@@ -56,6 +44,7 @@ def json_return_select(cursor):
     return result
 
 
+# Search all rangers for name entered
 def search_rangers_name(name):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
@@ -66,6 +55,8 @@ def search_rangers_name(name):
     cursor.close()
     return result
 
+
+# Search all rangers up to and including the rank enum defined for name entered
 def search_rangers_name_restricted(name, milranknum):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
@@ -78,6 +69,7 @@ def search_rangers_name_restricted(name, milranknum):
 
 
 # Make sure input is explicitly 10 digits
+# Search all rangers for DODID entered
 def search_rangers_id(dodid):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
@@ -88,6 +80,8 @@ def search_rangers_id(dodid):
     cursor.close()
     return result
 
+
+# Search all rangers up to and including the rank enum defined for DODID entered
 def search_rangers_id_restricted(dodid, milranknum):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
@@ -99,6 +93,7 @@ def search_rangers_id_restricted(dodid, milranknum):
     return result
 
 
+# Search all rangers for name and DODID entered
 def search_rangers_multifield(name, dodid):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
@@ -109,6 +104,8 @@ def search_rangers_multifield(name, dodid):
     cursor.close()
     return result
 
+
+# Search all rangers up to and including the rank enum defined for name and DODID entered
 def search_rangers_multifield_restricted(name, dodid, milranknum):
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
@@ -119,6 +116,8 @@ def search_rangers_multifield_restricted(name, dodid, milranknum):
     cursor.close()
     return result
 
+
+# Show ranger SRP table
 def show_ranger_srps():
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -131,10 +130,7 @@ def show_ranger_srps():
     return result
 
 
-# Testing method
-# print(show_ranger_srps())
-
-
+# Show ranger relative table
 def show_ranger_relatives():
     cnx = mysql.connector.connect(user='root', password='password',
                                   host='127.0.0.1',
@@ -146,7 +142,8 @@ def show_ranger_relatives():
     return result
 
 
-##sortName, sortID, sortCompany are booleans
+# sortName, sortID, sortCompany are booleans
+# Show rangers sorted by categories set to true
 def show_rangers(sortName, sortID, sortCompany):
     query = "SELECT * FROM regiment.rangers"
     if sortName | sortID | sortCompany:
@@ -168,6 +165,8 @@ def show_rangers(sortName, sortID, sortCompany):
     cursor.close()
     return result
 
+
+# Show rangers up to and including rank sorted by categories set to true
 def show_rangers_restricted(sortName, sortID, sortCompany, milranknum):
     query = "SELECT * FROM regiment.rangers where milrank <= " + str(milranknum)
     if sortName | sortID | sortCompany:
@@ -189,6 +188,8 @@ def show_rangers_restricted(sortName, sortID, sortCompany, milranknum):
     cursor.close()
     return result
 
+
+# Add a ranger to database
 def add_ranger(ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_address, ip_company, ip_milrank):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -201,6 +202,7 @@ def add_ranger(ip_fname, ip_mname, ip_lname, ip_ssn, ip_dodID, ip_birthdate, ip_
     cursor.close()
 
 
+# Add a relative to database
 def add_relative(ip_fname, ip_mname, ip_lname, ip_ssn, ip_rangerID, ip_birthdate, ip_address, ip_relationship):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -212,6 +214,7 @@ def add_relative(ip_fname, ip_mname, ip_lname, ip_ssn, ip_rangerID, ip_birthdate
     cursor.close()
 
 
+# Add a SRP to database
 def add_srp(ip_filename, ip_file_location, ip_srpID, ip_file_date, ip_days_until_out_of_date):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -222,6 +225,7 @@ def add_srp(ip_filename, ip_file_location, ip_srpID, ip_file_date, ip_days_until
     cursor.close()
 
 
+# Add an account to database
 def add_account(ip_ID, ip_rangerpassword, ip_IsAdmin):
     (ip_rangerpassword, salt) = init_hash_password(ip_rangerpassword)
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
@@ -233,7 +237,7 @@ def add_account(ip_ID, ip_rangerpassword, ip_IsAdmin):
     cursor.close()
 
 
-##Method for pulling unique key for soldiers for dropdowns
+# Method for pulling unique key for soldiers for dropdowns
 def pull_DODIDs():
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -246,6 +250,7 @@ def pull_DODIDs():
     return result
 
 
+# Modify data of ranger for field specified
 def modify_ranger(dodID, field, data):
     match field:
         case "fname":
@@ -299,6 +304,8 @@ def modify_ranger(dodID, field, data):
     cursor.close()
 
 
+# Delete ranger from database (Might be too dangerous to put on frontend, maybe restrict this action purely to direct
+# SQL modifications)
 def delete_ranger(ssn):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -310,6 +317,7 @@ def delete_ranger(ssn):
     cursor.close()
 
 
+# Modify data of relative for field specified
 def modify_relatives(rangerID, ssn, field, data):
     match field:
         case "fname":
@@ -365,6 +373,7 @@ def modify_relatives(rangerID, ssn, field, data):
     cursor.close()
 
 
+# Delete relative from database
 def delete_relatives(rangerID, ssn):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -424,7 +433,8 @@ def delete_srp_files(srpID, filename):
     cursor.close()
 
 
-# This will need to be modified when security features are implented
+# This will need to be modified when security features are implemented
+# Modify data field of an account
 def modify_accounts(ID, field, data):
     match field:
         case "rangerpassword":
@@ -451,7 +461,8 @@ def modify_accounts(ID, field, data):
     cursor.close()
 
 
-# This will need to be modified when security features are implented
+# This will need to be modified when security features are implemented
+# Delete an account
 def delete_accounts(ID):
     cnx = mysql.connector.connect(user='root', password='Fl1ght413612!',
                                   host='127.0.0.1',
@@ -461,6 +472,7 @@ def delete_accounts(ID):
     cnx.commit()
     cnx.close()
     cursor.close()
+
 
 # method to move file, given source and destination filepath as strings
 def move_file(filepath, destination):
@@ -477,6 +489,7 @@ def move_file(filepath, destination):
     else:
         return "Invalid source filepath or file does not exist"
 
+
 # given pdf filepath as string, delete source file
 def delete_source_file(filepath):
     if os.path.exists(filepath):
@@ -488,8 +501,8 @@ def delete_source_file(filepath):
             return "File is not a pdf"
     else:
         return "Invalid filepath or file does not exist"
-        
-        
+
+
 def insert_one_pdf_page_safe(srcfilepath, dstfilepath, target_index):
     source_pdf = fitz.open(srcfilepath)
     target_pdf = fitz.open(dstfilepath)
@@ -497,6 +510,7 @@ def insert_one_pdf_page_safe(srcfilepath, dstfilepath, target_index):
     target_pdf.insert_pdf(source_pdf, from_page=0, to_page=0, start_at=target_index)
     target_pdf.saveIncr()
     target_pdf.close()
+
 
 def insert_pdf_pages_safe(srcfilepath, dstfilepath, target_index):
     source_pdf = fitz.open(srcfilepath)
@@ -523,18 +537,23 @@ def insert_pdf_pages(srcfilepath, dstfilepath, target_index):
     delete_source_file(srcfilepath)
     target_pdf.saveIncr()
     target_pdf.close()
-    
+
+
 def init_hash_password(password):
     salt = os.urandom(16)
     hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
     hexsalt = salt.hex()
     return (hash_value, hexsalt)
 
+
 def hash_password(password, hexsalt):
     salt = bytes.fromhex((hexsalt))
     hash_value = hashlib.sha256(salt + password.encode('utf-8')).hexdigest()
     return (hash_value)
 
+
+# Takes in DODID and password for login, check if input is valid, returns account details if valid, returns string
+# explaining issue if invalid
 def logIn(dodID, passwordinput):
     if (dodID.isnumeric() == False):
         return "Data entered should be only numbers"
@@ -544,7 +563,8 @@ def logIn(dodID, passwordinput):
                                   host='127.0.0.1',
                                   database='regiment', port=3306)
     cursor = cnx.cursor()
-    cursor.execute("SELECT rangerpassword, salt, IsAdmin, milrank, milrank+0, fname, mname, lname from regiment.accounts join regiment.rangers on dodID = ID where ID = " + dodID)
+    cursor.execute(
+        "SELECT rangerpassword, salt, IsAdmin, milrank, milrank+0, fname, mname, lname from regiment.accounts join regiment.rangers on dodID = ID where ID = " + dodID)
     result = cursor.fetchall()
     if len(result) == 0:
         return "No account registered for DOD ID"

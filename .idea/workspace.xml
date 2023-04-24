@@ -104,7 +104,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="/usr/local/bin/python3.10" />
-      <option name="SDK_NAME" value="Python 3.10" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -203,6 +202,9 @@
       <workItem from="1677681208153" duration="2927000" />
       <workItem from="1677854699608" duration="287000" />
       <workItem from="1677855899203" duration="527000" />
+      <workItem from="1682085076972" duration="135000" />
+      <workItem from="1682085233403" duration="1100000" />
+      <workItem from="1682357535429" duration="633000" />
     </task>
     <servers />
   </component>
