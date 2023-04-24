@@ -1,7 +1,7 @@
+//Actually updates the member of personnel and confirms that to the user
 import React from "react";
 import './PersonnelInfo.css';
 import { useLocation } from 'react-router-dom'
-//import axios from 'axios';
 import { NavLink } from "react-router-dom";
 import initialDetails from "../data/initialDetails.json"
 import { Alert } from "react-bootstrap";
@@ -9,19 +9,18 @@ import { currentuser } from "../App";
 
 const UpdatePersonnelConfirm = props => {
   
-  //console.log(props);
-  //console.log(props.location);
   const location = useLocation()
   const { from } = location.state
-  //console.log(location);
   
-  console.log(from);
   const length = initialDetails.initialDetails.length;
+  // Pulls from UpdateExistingPersonnel to get what the user is changing
   var addedPersonnel = {
     picked: from.Status,
     name: from.Name,
     DODID: from.DODID,
   }
+
+  //Finds the member of personnel in the array and handles the change
   var test = 0;
   const user = currentuser();
   var allow = false;
@@ -29,6 +28,7 @@ const UpdatePersonnelConfirm = props => {
   for (i; i < length; i++) {
     if (initialDetails.initialDetails[i].DODID === addedPersonnel.DODID) {
       var j = 0
+      // Ensures the user has the ability to actually change this member of personnel
       while(j < user.unit.length) {
         if (initialDetails.initialDetails[i].unit !== user.unit[j]) {
           allow = false
@@ -38,6 +38,7 @@ const UpdatePersonnelConfirm = props => {
         }
         j++;
       }
+      // If the member is found and the user has permission, then this changes the field to the new value
       if (allow) {
       if (addedPersonnel.picked === "Rank") {
         initialDetails.initialDetails[i].Rank = addedPersonnel.name;
@@ -66,7 +67,7 @@ const UpdatePersonnelConfirm = props => {
   if (test === 0 && allow) {
     alert("DODID not found")
   }
-  console.log(initialDetails);
+  //If the user successfully changed the member of personnel, we show a confirmation of what's been updated
   if (test === 1 ) {
     return (
       <div>
@@ -78,6 +79,7 @@ const UpdatePersonnelConfirm = props => {
       </div>
     );
   } else {
+    //If user failed, it will show go back after the alert telling them they could not change the member of personnel
   return (
     <div>
       <NavLink to="/EnterNewPersonnel" activeClassName="active">

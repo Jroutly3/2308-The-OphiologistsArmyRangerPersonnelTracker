@@ -1,14 +1,15 @@
+//Creates the sort page in the app
 import React, {useState} from "react";
 import initialDetails from '../data/initialDetails';
 import Scroll from "../components/SearchFunctions/Scroll";
 import SearchList from "../components/SearchFunctions/SearchList";
 import Card from "../components/Card";
-//import flask_server from "../../flask_server.py"
   
 const Sort = () => {
   const [sortField, setsortField] = useState(false);
    const [sortShow, setsortShow] = useState(false); 
-  console.log(initialDetails.initialDetails);
+
+   //Creates the initial card that shows the values of each column
    const testperson = {
     "id": 0,
     "unit": "Company",
@@ -21,8 +22,8 @@ const Sort = () => {
     "Status": "Status"
   };
 
+  //Sets our array to a variable then sorts the array depending on the button pressed
   var sorted = initialDetails.initialDetails;
-  //console.log(sorted)
   function sayHello() {
     sorted.sort((a,b) => a.unit - b.unit);
     if (sortField === false) {
@@ -30,8 +31,6 @@ const Sort = () => {
     } else {
       setsortField(false);
     }
-    
-    //console.log(sorted)
   }
   function sortName() {
     sorted.sort((a,b) => a.DODID - b.DODID);
@@ -40,8 +39,9 @@ const Sort = () => {
     } else {
       setsortShow(false);
     }
-    //console.log(sorted)
   }
+
+  //Returns the sorted list in the cards
   function totalSort() {
     return (
       <Scroll>
@@ -50,12 +50,16 @@ const Sort = () => {
     </Scroll>
     )
   }
+
+  //Styling
   var letterStyle = {
     padding: 10,
     justifyContent:'center',
     alignItems:'center',
     display: 'flex',
   }
+
+  //Returns the page with the sorted list along with the two buttons that will sort by company of DODID
   return (
     <section className="garamond">
           <div className="navy georgia ma0 grow" style={letterStyle}>

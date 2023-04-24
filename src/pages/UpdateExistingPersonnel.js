@@ -1,9 +1,11 @@
+//Lets the user update an existing member of personnel. The actual updating is done in updatepersonnelconfirm, this is the page that lets us get the data
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './EnterNewPersonnel.css';
 
 const UpdateExistingPersonnel = () => {
+  // Declares everything that can change
   const [state, setState] = useState({
     Rank: "",
     Company: "",
@@ -14,6 +16,8 @@ const UpdateExistingPersonnel = () => {
     Address: "",
     Status: ""
   });
+
+  // Changes the input value based on what the user inputs
   const handleInputChange = event => {
     const { name, value } = event.target;
     setState(prevState => ({
@@ -21,12 +25,16 @@ const UpdateExistingPersonnel = () => {
       [name]: value
     }));
   };
+
+  //Styling
   var letterStyle = {
     padding: 10,
     justifyContent:'center',
     alignItems:'left',
     display: 'flex'
   }
+
+  // Displays the update existing personnel frontend. This will send the information on what the user wants to change to update personnel confirm.
   return (
   <div>
       <h1 className="letterStyle">Update Existing Personnel</h1>
@@ -80,50 +88,5 @@ const UpdateExistingPersonnel = () => {
     </div>
   );
 }
-
-/*
-  return (
-    <div style={letterStyle}>
-      <h1 style={letterStyle}>
-        Update Existing Personnel
-      </h1>
-      <Dropdown
-        formLabel="Select the user's DODID"
-        buttonText="Submit"
-        action= "/UpdatePersonnelConfirm"
-        style={letterStyle} 
-      >
-        <Option selected value="Click to see options" style={letterStyle}/>
-        <Option value= {initialDetails.initialDetails[0].DODID} />
-        <Option value= {initialDetails.initialDetails[1].DODID} />
-        <Option value= {initialDetails.initialDetails[2].DODID} />
-        <Option value= {initialDetails.initialDetails[3].DODID} />
-        <Option value= {initialDetails.initialDetails[4].DODID} />
-        <Option value= {initialDetails.initialDetails[5].DODID} />
-        <Option value= {initialDetails.initialDetails[6].DODID} />
-        <Option value= {initialDetails.initialDetails[7].DODID} />
-        <Option value= {initialDetails.initialDetails[8].DODID} />
-        <Option value= {initialDetails.initialDetails[9].DODID} />
-        <Option value= {initialDetails.initialDetails[10].DODID} />
-        <Option value= {initialDetails.initialDetails[11].DODID} />
-      </Dropdown>
-      <DropdownSelect
-        formLabel="What do you want to change?"
-        buttonText="Submit"
-        action= "/UpdatePersonnelConfirm"
-        style={letterStyle} 
-      >
-        <OptionSelect selected value="Click to see options" style={letterStyle}/>
-        <OptionSelect value= "Rank" />
-        <OptionSelect value= "Unit" />
-        <OptionSelect value= "Name" />
-        <OptionSelect value= "Ssn" />
-        <OptionSelect value= "Birthdate" />
-        <OptionSelect value= "Address" />
-        <OptionSelect value= "Status" />
-      </DropdownSelect>
-      <div style={{padding: 140}}></div>
-    </div>
-  );*/
   
 export default UpdateExistingPersonnel;

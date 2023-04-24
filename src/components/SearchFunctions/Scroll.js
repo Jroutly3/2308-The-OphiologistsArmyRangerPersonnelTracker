@@ -1,3 +1,4 @@
+//Lets the user scroll in the list of personnel in the search option
 import React from 'react';
 
 const Scroll = (props) => {

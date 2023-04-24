@@ -1,7 +1,12 @@
+/*Welcome to the army ranger personnel tracker app. This is the starting point for all the code that works in the front end.
+ The login functionality is also implemented in this file, however I would HIGHLY recommend changing it to be military grade 
+ encryption. On the backend SQL, there is a better function. Importantly, the SQL and React are not connected since we worried 
+ about security issues that may arise on your end. */
+
+ //Here are our imports for this file
 import React, { useState } from "react";
 import './App.css';
 import Search from './pages/Search';
-//import initialDetails from './data/initialDetails';
 import { BrowserRouter as Router, Routes, Route}
     from 'react-router-dom';
 import Navbar from "./components/Navbar";
@@ -16,9 +21,7 @@ import Welcome from "./pages/Welcome";
 import { Link } from "react-router-dom";
 import NewPersonnelConfirm from "./pages/NewPersonnelConfirm";
 
-
-
-
+//The database contains our inital users. The u for admin represents universal.
 export const database = [
   {
     username: "admin",
@@ -37,6 +40,7 @@ export const database = [
   }
 ];
 
+// logged user is used for our authentication section to see what the current user has entered for username and password
 var loggeduser = {
   username: "",
   password: "",
@@ -45,9 +49,12 @@ var loggeduser = {
 
 function App() {
 
+  // This is used for styling later in the app
   var backGround = {
     backgroundColor: '#EBF7F5'
   }
+
+  // The standard styleing for each page
   var logstyle = {
     backgroundColor: '#EBF7F5',
     padding: 10,
@@ -55,19 +62,21 @@ function App() {
     alignItems:'center',
     display: 'flex',
   }
-
+  
+  //Used to fill out the page with the background color
   var padstyle = {
     backgroundColor: '#EBF7F5',
     padding: 50,
   }
+
+  // Also used to fill out page with background color, but the login screen
   var logpadstyle = {
     backgroundColor: '#EBF7F5',
     padding: 500,
   }
+  // Use state to be used for login
   const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
-  
-    // User Login info
     
 
     const errors = {
@@ -75,6 +84,7 @@ function App() {
         pass: "invalid password"
     };
     
+    //When the user clicks login
     const handleSubmit = (event) => {
         //Prevent page reload
         if (isSubmitted === false) {
@@ -100,7 +110,8 @@ function App() {
           setErrorMessages({ name: "uname", message: errors.uname });
         }
       };
-
+    
+      //Tells the error
     const renderErrorMessage = (name) =>
     name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
@@ -127,6 +138,7 @@ function App() {
      </div>
    );
 
+   //Code for basic login screen
    const loggs = (
     <div className="login-form">
         <div style={padstyle}></div>
@@ -137,6 +149,7 @@ function App() {
     </div>
    )
 
+   //Code for the navbar that appears after login. Contains links to every page you can visit along with a page we were testing with
    const logins = (<div style={backGround}>
     <Router>
     <Navbar />
@@ -155,16 +168,17 @@ function App() {
     </Router>
     </div>)
 
+// Returns either the login screen or welcome page based on if the user is logged in
   return (
     <div>
       {isSubmitted ? logins : loggs}
     </div>
   );
 }
-//<Route path="/PersonnelInfo" element={<PersonnelInfo/>} />  Personnel = {initialDetails.initialDetails[1]} render={(props) => <PersonnelInfo {...props}
 
 export default App;
 
+// used for restricting access
 export function currentuser() {
   return loggeduser
 }

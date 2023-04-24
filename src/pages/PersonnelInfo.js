@@ -1,3 +1,4 @@
+// Displays the personnel info when a card in search or sort is clicked
 import React, {useState} from "react";
 import './PersonnelInfo.css';
 import { useLocation } from 'react-router-dom'
@@ -7,16 +8,15 @@ import { currentuser } from "../App";
 const PersonnelInfo = (props) => {
   const [file, setFile] = useState()
 
+  //This is used for file upload
   function handleChange(event) {
     setFile(event.target.files[0])
   }
-  //console.log(props);
-  //console.log(props.location);
+  //Collects the info of the selected member of personnel
   const location = useLocation()
   const { from } = location.state
-  //console.log(location);
-  console.log(from);
 
+  // Allows for file upload. This is not yet connected to the database
   function handleSubmit(event) {
     event.preventDefault()
     const url = 'http://localhost:3000/uploadFile';
@@ -33,6 +33,8 @@ const PersonnelInfo = (props) => {
     });
 
   }
+
+  //Checks if the user is allowed to view the information of the member of personnel they clicked based on if they are in the same company
   var allow;
   const user = currentuser();
   var i = 0;
@@ -46,10 +48,12 @@ const PersonnelInfo = (props) => {
     i++;
   }
   
+  // u represents univeral access, which we have given to admins. Feel free to delete this if you don't want a universal access condition
   if (user.unit === 'u') {
     allow = true
   }
 
+  // If the user is allowed to view the personnel information, then this will run and all the info will be shown
   const allowed = (
     <div className="Personnel">
         <h1>
@@ -71,12 +75,14 @@ const PersonnelInfo = (props) => {
       </div>
   )
 
+  // If the user is not allowed to view the information, they will be told access is denied 
   const disallow = (
     <div className="Personnel">
       <h1>Access Denied</h1>
       <div style={{padding: 400}}></div>
     </div>
   )
+  // Runs the check for allow vs disallow
     return (
       <div>
       {allow ? allowed : disallow}
@@ -85,12 +91,3 @@ const PersonnelInfo = (props) => {
   };
     
   export default PersonnelInfo;
-
-  /*
-  <h2 className="info">{Personnel.Personnel.Rank} {Personnel.Personnel.name}</h2>
-        <p className="info">DODID: {Personnel.Personnel.DODID}</p>
-        <p className="info">Company: {Personnel.Personnel.unit}</p>
-        <p className="info">Birthdate: {Personnel.Personnel.Birthdate}</p>
-        <p className="info">SSN: {Personnel.Personnel.ssn}</p>
-        <p className="info">Address: {Personnel.Personnel.Address}</p>
-        <p className="info">Status: {Personnel.Personnel.Status}</p> */

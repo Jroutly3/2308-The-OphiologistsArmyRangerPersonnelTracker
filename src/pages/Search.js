@@ -1,17 +1,16 @@
+// Creates the search page in the app
 import React, {useState} from "react";
 import Scroll from "../components/SearchFunctions/Scroll";
 import SearchList from "../components/SearchFunctions/SearchList";
 import initialDetails from '../data/initialDetails';
 import Card from "../components/Card";
 
-
-
 function Search({details = initialDetails.initialDetails}) {
-  //console.log(initialDetails);
-  //console.log(details)
+
     const [searchField, setSearchField] = useState("");
     const [searchShow, setSearchShow] = useState(false); 
 
+    //Creates the initial card that shows the values of each column
     const testperson = {
       "id": 0,
       "unit": "Company",
@@ -25,7 +24,7 @@ function Search({details = initialDetails.initialDetails}) {
     };
 
    
-
+    // Basic search function
     const filteredPersons = details.filter(
         person => {
             return (
@@ -34,6 +33,8 @@ function Search({details = initialDetails.initialDetails}) {
             );
         }
     );
+
+    //Changes what to show in the search based on the input
     const handleChange = e => {
         setSearchField(e.target.value);
         if(e.target.value===""){
@@ -44,6 +45,7 @@ function Search({details = initialDetails.initialDetails}) {
         }
     };
 
+    //Creates the list of users and the description bar
     function searchList() {
       if (searchShow) {
         return(
@@ -55,6 +57,7 @@ function Search({details = initialDetails.initialDetails}) {
       }
     }
 
+    //Basic styling
     var letterStyle = {
       padding: 10,
       marginLeft: 5,
@@ -63,10 +66,12 @@ function Search({details = initialDetails.initialDetails}) {
       display: 'flex',
     }
 
+    //More basic styling
     var backGround = {
       backgroundColor: '#EBF7F5'
     }
 
+    //Displays the page and lets the above functions work together for the search function 
     return (
         <section className="garamond" style={backGround}>
           <div className="navy georgia ma0 grow" style={letterStyle}>
@@ -90,23 +95,3 @@ function Search({details = initialDetails.initialDetails}) {
 }
 
 export default Search;
-
-/*
-const testperson = {
-      "id": 0,
-      "unit": "Company",
-      "name": "Name",
-      "location": "Location",
-      "DODID": "DODID"
-    }
-    <Card key={testperson.id} person = {testperson}/>
-    
-    
-     var letterStyle = {
-      padding: 10,
-      margin: 10,
-      display: "inline-block",
-      fontFamily: "monospace",
-      fontSize: 24,
-      textAlign: "center"
-  };*/

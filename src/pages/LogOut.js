@@ -1,20 +1,7 @@
+// Allows the user to logout. Pressing the button reloads the page to sim a logout. This should be changed based on military security.
 import React from "react";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-//import Python from "../Python";
-  
 
-//var perf = require('./Python.html');
-
-/*class LogOut extends React.Component {
-  render(){
-     return (
-      <div>
-      <iframe src="Python.html"></iframe>
-    </div>
-     );
-  }
-}*/
 function LogOut() {
   function refreshPage(){
     window.location.reload();
