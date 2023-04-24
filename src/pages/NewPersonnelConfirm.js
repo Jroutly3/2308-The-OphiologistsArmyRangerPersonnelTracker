@@ -67,6 +67,7 @@ const UpdatePersonnelConfirm = props => {
         <div>
           <strong>Status:</strong> {from.Status}
         </div>
+        <div style={{padding: 320}}></div>
       </div>
     </div>
   );

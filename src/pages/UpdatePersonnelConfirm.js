@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { NavLink } from "react-router-dom";
 import initialDetails from "../data/initialDetails.json"
 import { Alert } from "react-bootstrap";
+import { currentuser } from "../App";
 
 const UpdatePersonnelConfirm = props => {
   
@@ -22,9 +23,22 @@ const UpdatePersonnelConfirm = props => {
     DODID: from.DODID,
   }
   var test = 0;
-  var i = 0;
+  const user = currentuser();
+  var allow = false;
+  var i = 0
   for (i; i < length; i++) {
     if (initialDetails.initialDetails[i].DODID === addedPersonnel.DODID) {
+      var j = 0
+      while(j < user.unit.length) {
+        if (initialDetails.initialDetails[i].unit !== user.unit[j]) {
+          allow = false
+        } else {
+          allow = true
+          j = user.unit.length
+        }
+        j++;
+      }
+      if (allow) {
       if (addedPersonnel.picked === "Rank") {
         initialDetails.initialDetails[i].Rank = addedPersonnel.name;
       } else if (addedPersonnel.picked === "Company") {
@@ -44,9 +58,12 @@ const UpdatePersonnelConfirm = props => {
       }
       
     test = 1
+  } else {
+    alert("Failed")
+  }
     }
   }
-  if (test === 0) {
+  if (test === 0 && allow) {
     alert("DODID not found")
   }
   console.log(initialDetails);
@@ -57,6 +74,7 @@ const UpdatePersonnelConfirm = props => {
           Go Back
         </NavLink>
         <Alert>Personnel {addedPersonnel.DODID}'s {addedPersonnel.picked} has been updated</Alert>
+        <div style={{padding: 500}}></div>
       </div>
     );
   } else {
@@ -65,6 +83,7 @@ const UpdatePersonnelConfirm = props => {
       <NavLink to="/EnterNewPersonnel" activeClassName="active">
         Go Back
       </NavLink>
+      <div style={{padding: 500}}></div>
     </div>
   );
 }

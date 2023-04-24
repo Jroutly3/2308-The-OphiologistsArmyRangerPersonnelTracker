@@ -67,14 +67,14 @@ const PersonnelInfo = (props) => {
           <input type="file" onChange={handleChange}/>
           <button type="submit">Upload</button>
         </form>
-        <div style={{padding: 80}}></div>
+        <div style={{padding: 250}}></div>
       </div>
   )
 
   const disallow = (
     <div className="Personnel">
       <h1>Access Denied</h1>
-      <div style={{padding: 220}}></div>
+      <div style={{padding: 400}}></div>
     </div>
   )
     return (

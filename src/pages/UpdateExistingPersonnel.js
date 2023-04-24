@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './EnterNewPersonnel.css';
-import { Dropdown, Option } from "../components/DropdownDOD";
-import initialDetails from '../data/initialDetails';
-import { DropdownSelect, OptionSelect } from '../components/DropdownSelector'
-  
 
 const UpdateExistingPersonnel = () => {
   const [state, setState] = useState({
@@ -76,11 +72,11 @@ const UpdateExistingPersonnel = () => {
           state={{ from: state }}
   
         >
-          Register
+          Update
         </Link>
         </div>
       </Form>
-      <div style={{padding: 200}}></div>
+      <div style={{padding: 300}}></div>
     </div>
   );
 }
