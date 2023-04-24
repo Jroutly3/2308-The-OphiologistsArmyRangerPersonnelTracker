@@ -22,7 +22,7 @@ function LogOut() {
   return(
     <div>
     <Link to="/Welcome" onClick={refreshPage}>Log Out</Link>
-    <div style={{padding:325}}></div>
+    <div style={{padding:450}}></div>
     </div>
   );
 }

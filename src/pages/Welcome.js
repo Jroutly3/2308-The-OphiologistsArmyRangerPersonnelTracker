@@ -28,7 +28,7 @@ function Welcome() {
             <div style={{padding: 10}}>Sort: Organize all Personnel members</div>
             <div style={{padding: 10}}>Enter New Personnel: Add a Personnel member</div>
             <div style={{padding: 10}}>Update Existing Personnel: Change info about a Personnel member</div>
-            <div style={{padding: 150}}></div>
+            <div style={{padding: 300}}></div>
         </div>
     )
 }

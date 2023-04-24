@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Card({person}) {
     
     return(
-        <div className="tc bg-light-green dib br3 pa1 pl3 ma2 ml4 grow bw2 shadow-5 fl w-90" >
+        <div className="tc bg-light-green dib br3 pa1 pl3 ma2 ml5 grow bw2 shadow-5 fl w-90" >
         <Link to="/PersonnelInfo" state={{ from: person }} className="card">
             <p style={{maxWidth:"25%", minWidth:"25%", textAlign:"left"}}>{person.Rank}</p>
             <p style={{maxWidth:"25%", minWidth:"25%", textAlign:"left"}}>{person.name}</p>

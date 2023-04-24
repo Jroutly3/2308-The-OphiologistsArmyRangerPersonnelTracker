@@ -19,7 +19,7 @@ import NewPersonnelConfirm from "./pages/NewPersonnelConfirm";
 
 
 
-const database = [
+export const database = [
   {
     username: "admin",
     password: "passadmin",
@@ -33,7 +33,7 @@ const database = [
   {
     username: "1",
     password: "1",
-    unit: ["1", "3", "5", "7"]
+    unit: ["1", "3", "5", "7", "9"]
   }
 ];
 

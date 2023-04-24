@@ -61,9 +61,10 @@ const Sort = () => {
           <div className="navy georgia ma0 grow" style={letterStyle}>
             <h2 className="f2">Personnel Sort</h2>
           </div>
-          <button onClick={sayHello} style={{marginLeft:30}}>Sort by Company</button>
+          <button onClick={sayHello} style={{marginLeft:65}}>Sort by Company</button>
           <button onClick={sortName}>Sort by DODID</button>
           {totalSort()}
+          <div style={{padding: 30}}></div>
         </section>
   );
 };
