@@ -1,10 +1,11 @@
+/*Creates the enter new personnel page. This file does not add the new member of personnel to the array yet, it's only for the initial entering data*/
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './EnterNewPersonnel.css';
-// import initialDetails from '../data/initialDetails.json'
 
 const EnterNewPersonnel = props => {
+  // Creates a variable to show what the user is entering
   const [state, setState] = useState({
     Rank: "",
     Company: "",
@@ -16,6 +17,7 @@ const EnterNewPersonnel = props => {
     Status: ""
   });
 
+  //Changes the above variable based on what the user types in the page
   const handleInputChange = event => {
     const { name, value } = event.target;
     setState(prevState => ({
@@ -24,6 +26,7 @@ const EnterNewPersonnel = props => {
     }));
   };
   
+  //Standard website styling
   var letterStyle = {
     padding: 10,
     justifyContent:'center',
@@ -31,6 +34,8 @@ const EnterNewPersonnel = props => {
     display: 'flex',
   }
 
+  // Builds the page. Creates a form with different values based on what is expected to be entered for a member of personnel.
+  // Clicking on Register will take the user to NewPersonnelConfirm
   return (
     <div>
       <h1 className="letterStyle">Enter New Personnel</h1>
@@ -126,21 +131,3 @@ const EnterNewPersonnel = props => {
 };
 
 export default EnterNewPersonnel;
-
-/*<Form.Control
-            type="text"
-            placeholder="Enter Status"
-            name="Status"
-            onChange={handleInputChange}
-          />
-*/
-/*<Link
-          className="button-prime"
-          to={{
-            pathname: "/UpdatePersonnelConfirm",
-            state
-          }}
-          onClick = {console.log(state)}
-        >
-          Register
-        </Link>*/

@@ -1,8 +1,9 @@
-import React,{ Image } from "react";
+//Basic welcome page when the user logs in to the app
+import React from "react";
 import logo from '../logo.png';
-//import { currentuser } from "../App";
 
 function Welcome() {
+    //Styling for welcome
     var welcome = {
         backgroundColor: '#EBF7F5',
         padding: 10,
@@ -10,6 +11,7 @@ function Welcome() {
         alignItems:'center',
         display: 'flex',
       }
+     // more styling
     var wrap = {
         backgroundColor: '#EBF7F5',
         padding: 10,
@@ -17,6 +19,7 @@ function Welcome() {
         alignItems:'center',
         display: 'flex',
     }
+    //Builds welcome page
     return(
         <div>
             <div style={wrap}>

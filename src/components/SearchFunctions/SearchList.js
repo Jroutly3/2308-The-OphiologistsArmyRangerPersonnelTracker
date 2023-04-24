@@ -1,3 +1,4 @@
+// Creates the list of personnel when the user types something in the search bar
 import React from "react";
 import Card from '../../components/Card';
 

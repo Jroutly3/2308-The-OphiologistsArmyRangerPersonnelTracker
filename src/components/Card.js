@@ -1,3 +1,4 @@
+/*Creates the user card used in the search and sort function. This file also lets the user click on a member of personnel and see their info*/
 import React from "react";
 import './Card.css'
 import { Link } from "react-router-dom";

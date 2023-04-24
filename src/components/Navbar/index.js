@@ -1,8 +1,8 @@
+/*Creates the navbar at the top of the screen */
+
 import React from "react";
 import { Nav, NavLink, NavMenu } 
     from "./NavbarElements";
-
-// import initialDetails from "../../data/initialDetails";
   
 const navbar = () => {
   return (
